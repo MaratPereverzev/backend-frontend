@@ -1,5 +1,40 @@
 {
   "tables": {
+    "goods": {
+      "tableName": "goods",
+      "schema": {
+        "id": {
+          "allowNull": false,
+          "primaryKey": true,
+          "autoIncrement": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "caption": {
+          "field": "caption",
+          "seqType": "Sequelize.TEXT"
+        },
+        "description": {
+          "field": "description",
+          "seqType": "Sequelize.TEXT"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "deletedAt": {
+          "field": "deletedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": []
+    },
     "users": {
       "tableName": "users",
       "schema": {
@@ -36,6 +71,6 @@
       "indexes": []
     }
   },
-  "exists": false,
-  "revision": 1
+  "exists": true,
+  "revision": 2
 }

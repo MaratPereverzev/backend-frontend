@@ -1,0 +1,11 @@
+http://localhost:8080/user?search=Ping
+
+###
+
+POST http://localhost:8080/user
+content-type: application/json
+
+{
+  "caption": "ping",
+  "description": "pong"
+}
