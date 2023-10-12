@@ -24,11 +24,11 @@ if (config.use_env_variable) {
 }
 
 //return first-capitalized words for making names for models
-function capitalizeFirstLetter(string) {
+function capitalizeFirstLetterWithoutIndex(string) {
   if (string === "index") {
     return "";
   }
-  return string[0] + string.slice(1);
+  return string[0].toUpperCase() + string.slice(1);
 }
 
 //find all models in /models directory
@@ -60,8 +60,10 @@ findFile.forEach((item) => {
       ? path
           .dirname(item.replace(__dirname + path.sep, ""))
           .split(path.sep)
-          .map((dir, index) => (index === 0 ? dir : capitalizeFirstLetter(dir)))
-          .join("") + capitalizeFirstLetter(file)
+          .map((dir, index) =>
+            index === 0 ? dir : capitalizeFirstLetterWithoutIndex(dir)
+          )
+          .join("") + capitalizeFirstLetterWithoutIndex(file)
       : file;
   const model = require(item);
 
