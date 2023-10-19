@@ -1,1 +1,2 @@
 require("./sequelize");
+require("./console");

@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const models = require("../../db/models");
+const { checkVal } = require("../../utils");
 
 const getURI = (req, res) => {
   const { id } = req.params;
@@ -22,12 +23,26 @@ const get = (req, res) => {
     .then((data) => res.send(data))
     .catch((err) => res.status(500).send(err));
 };
+
+const update = (req, res) => {
+  const { id, ...other } = req.body;
+  models.user
+    .update(other, { where: { id } })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+};
+
 module.exports = (router) => {
   router.get("/", get);
+  router.get("/:id", getURI);
+  router.put("/", checkVal(["id"], "body"), update);
   return router;
   /*
   router.post("/", post);
-  router.put("/", put);
   router.delete("/", del);
   */
 };
