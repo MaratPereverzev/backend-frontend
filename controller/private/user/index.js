@@ -1,6 +1,6 @@
 const { Op } = require("sequelize");
-const models = require("../../db/models");
-const { checkVal } = require("../../utils");
+const models = require("../../../db/models");
+const { checkVal } = require("../../../utils");
 
 const getURI = (req, res) => {
   const { id } = req.params;
@@ -40,6 +40,7 @@ module.exports = (router) => {
   router.get("/", get);
   router.get("/:id", getURI);
   router.put("/", checkVal(["id"], "body"), update);
+
   return router;
   /*
   router.post("/", post);

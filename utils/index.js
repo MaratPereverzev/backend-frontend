@@ -1,1 +1,5 @@
-module.exports = { ...require("./express") };
+module.exports = {
+  ...require("./express"),
+  ...require("./module"),
+  ...require("./jwt"),
+};
