@@ -2,7 +2,7 @@ const path = require("path");
 const basename = path.basename(__filename);
 const file = require("file");
 const { Router } = require("express");
-const { capitalizeFirstLetterWithoutIndex } = require("../../utils");
+const { capitalizeFirstLetterWithoutIndex } = require("@utils");
 
 const controllers = [];
 const findFile = [];

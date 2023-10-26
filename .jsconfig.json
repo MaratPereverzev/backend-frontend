@@ -1,0 +1,26 @@
+{
+  "conpilerOptions": {
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@config": ["config"],
+      "@config/*": ["config/*"],
+
+      "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
+
+      "@models": ["models"],
+      "@models/*": ["models/*"],
+
+      "@class": ["class"],
+      "@class/*": ["class/*"],
+
+      "@controller": ["controller"],
+      "@controller/*": ["controller/*"],
+
+      "@events": ["events"],
+      "@events/*": ["events/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,9 +1,10 @@
-require("./config");
+require("module-alias/register");
+require("@config");
+require("@events");
 const express = require("express");
-const controllers = require("./controller");
-const { jwtCreate, jwtVal } = require("./utils");
-
+const controllers = require("@controller");
 const app = express();
+const { jwtCreate } = require("@utils");
 
 app.use(express.json());
 
@@ -38,7 +39,10 @@ if (Array.isArray(controllers.private)) {
 app.listen(8080, () => {
   console.log("a server is listening on port: 8080");
 });
-
 /*
- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NX0.LcsSrAyx2o5oQF8veOhzvBhhz9MfTASxF_Hatx2qUSk
+console.log(
+  jwtCreate({ id: 5, caption: "marat", description: "qwerty" }, "123")
+);
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiY2FwdGlvbiI6Im1hcmF0In0.p-v_fZf3NqIGmdg2SvlA9_lW8Pb6BxP9kbTqAL2k0jU
  */

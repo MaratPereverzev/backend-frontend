@@ -1,1 +1,4 @@
-module.exports = { ...require("./errorMiddleWare") };
+module.exports = {
+  ...require("./errorMiddleWare"),
+  ...require("./eventEmitter"),
+};

@@ -2,8 +2,8 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
 const file = require("file");
-const config = require(__dirname + "/../../config/config.json")["development"];
-const { capitalizeFirstLetterWithoutIndex } = require("../../utils");
+const config = require("@config/config.json")["development"];
+const { capitalizeFirstLetterWithoutIndex } = require("@utils");
 const db = {};
 
 //define a default options for models

@@ -11,12 +11,21 @@
     "miu": "npx sequelize-cli db:seed:undo",
     "mi": "npx sequelize-cli db:migrate"
   },
+  "_moduleAliases": {
+    "@utils": "utils",
+    "@models": "db/models",
+    "@config": "config",
+    "@class": "class",
+    "@controller": "controller",
+    "@events": "events"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
     "file": "^0.2.2",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "nodemon": "^3.0.1",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
