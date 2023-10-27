@@ -8,7 +8,6 @@ const jwtCreate = (data, password) =>
 const jwtVal = (token) =>
   jwt.verify(token, password, (err, data) => {
     if (err) {
-      console.log(err);
       return false;
     }
     return data;
