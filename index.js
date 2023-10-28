@@ -6,6 +6,7 @@ const controllers = require("@controller");
 const app = express();
 const { jwtCreate } = require("@utils");
 const wsServer = require("./wsServer");
+const models = require("@models");
 
 app.use(express.json());
 
@@ -26,3 +27,5 @@ Object.keys(controllers).forEach((key) => {
 app.listen(8080, () => {
   console.log("a server is listening on port: 8080");
 });
+
+//models.user.create({ login: "marat", password: "123321" });

@@ -6,6 +6,8 @@ module.exports = (db) => {
     {
       caption: DataTypes.TEXT,
       description: DataTypes.TEXT,
+      login: DataTypes.TEXT,
+      password: DataTypes.TEXT,
     },
     {
       paranoid: true,
