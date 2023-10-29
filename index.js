@@ -4,7 +4,6 @@ require("@events");
 const express = require("express");
 const controllers = require("@controller");
 const app = express();
-const { jwtCreate } = require("@utils");
 const wsServer = require("./wsServer");
 const models = require("@models");
 
@@ -28,4 +27,11 @@ app.listen(8080, () => {
   console.log("a server is listening on port: 8080");
 });
 
+/*
+models.userRole.create({
+  caption: "auto create",
+  controller: "user",
+  userId: 5,
+});
+*/
 //models.user.create({ login: "marat", password: "123321" });

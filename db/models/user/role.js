@@ -6,8 +6,16 @@ module.exports = (db, defOptions, modelName) => {
     {
       caption: DataTypes.TEXT,
       description: DataTypes.TEXT,
+      controller: DataTypes.TEXT,
     },
     defOptions
   );
+
+  model.associate = (models) => {
+    model.belongsTo(models.user, {
+      onUpdate: "NO ACTION",
+      onDelete: "CASCADE",
+    });
+  };
   return model;
 };

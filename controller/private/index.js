@@ -29,7 +29,7 @@ findFile.forEach((item) => {
   /*chech wether the file in /modles folder directry
     if it is - creates a name for a model that consists of the file name
     if it's not - creates a name for a model that consists of the subfolders names and corresponding file name */
-  const modelName =
+  const controllerName =
     path.dirname(item.replace(__dirname + path.sep, "")) !== "."
       ? path
           .dirname(item.replace(__dirname + path.sep, ""))
@@ -39,18 +39,20 @@ findFile.forEach((item) => {
           )
           .join("") + capitalizeFirstLetterWithoutIndex(file)
       : file;
-  const model = require(item);
+  const controller = require(item);
 
-  if (typeof model === "function") {
+  if (typeof controller === "function") {
     const router = Router();
     router.use(jwtMiddleware);
-    const loadModel = model(router, modelName);
+    const loadController = controller(router, controllerName);
 
-    if (loadModel) {
+    if (loadController) {
       loaderFile.push(
-        modelName === loadModel.name ? modelName : `${modelName}`
+        controllerName === loadController.name
+          ? controllerName
+          : `${controllerName}`
       );
-      controllers.push({ name: `/${modelName}`, router: loadModel });
+      controllers.push({ name: `/${controllerName}`, router: loadController });
     }
   }
 });
@@ -64,5 +66,8 @@ if (typeof console.logUserDone === "function") {
 } else {
   console.log("SYSTEM", `Controllers PRIVATE: \n ${loaderFile.join(", ")}`);
 }
+
+process.controllers = {};
+process.controllers.private = loaderFile;
 
 module.exports = controllers;

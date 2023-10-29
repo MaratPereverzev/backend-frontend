@@ -4,9 +4,14 @@ const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
 const file = require("file");
 const config = require("@config/config.json")["development"];
-const { capitalizeFirstLetterWithoutIndex } = require("@utils");
 const db = {};
 
+const capitalizeFirstLetterWithoutIndex = (str) => {
+  if (str === "index") {
+    return "";
+  }
+  return str[0].toUpperCase() + str.slice(1);
+};
 //define a default options for models
 const defOptions = {
   paranoid: true,

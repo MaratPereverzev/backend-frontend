@@ -15,12 +15,7 @@ const get = (req, res) => {
   const { search, limit, offset } = req.query;
 
   process.myEvents?.emit("new order", req.userData);
-  if (!req.userData?.role?.getUser) {
-    res.status(401).send({
-      error: `user '${req.userData.caption}' doesn't have access to user/get`,
-    });
-    return;
-  }
+
   const where = search ? { caption: { [Op.getLike()]: `%${search}%` } } : null;
   models.user
     .findAndCountAll({
@@ -28,7 +23,22 @@ const get = (req, res) => {
       ...(limit ? { limit } : {}),
       ...(offset ? { offset } : {}),
     })
-    .then((data) => res.send(data))
+    .then(async (data) => {
+      const userRoleData = await models.userRole.findAll({
+        where: { userId: data.rows.map((item) => item.id) },
+      });
+
+      const result = {
+        count: data.count,
+        rows: data.rows.map((item) => {
+          return {
+            ...item.toJSON(),
+            userRoles: userRoleData.find((role) => role.userId === item.id),
+          };
+        }),
+      };
+      res.send(result);
+    })
     .catch((err) => res.status(500).send(err));
 };
 

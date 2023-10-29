@@ -1,17 +1,19 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = (db) => {
+module.exports = (db, defOptions, modelName) => {
   const model = db.define(
-    "user",
+    modelName,
     {
       caption: DataTypes.TEXT,
       description: DataTypes.TEXT,
+
       login: DataTypes.TEXT,
       password: DataTypes.TEXT,
+
+      isAdmin: DataTypes.BOOLEAN,
+      isSuperAdmin: DataTypes.BOOLEAN,
     },
-    {
-      paranoid: true,
-    }
+    defOptions
   );
   return model;
 };
