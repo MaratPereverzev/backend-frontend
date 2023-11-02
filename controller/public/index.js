@@ -3,6 +3,7 @@ const basename = path.basename(__filename);
 const file = require("file");
 const { Router } = require("express");
 const { capitalizeFirstLetterWithoutIndex, jwtMiddleware } = require("@utils");
+const { routerCheck } = require("@utils");
 
 const controllers = [];
 const findFile = [];
@@ -47,6 +48,15 @@ findFile.forEach((item) => {
     const loadController = controller(router, controllerName);
 
     if (loadController) {
+      const checkResult = routerCheck(router, ["put", "post", "delete"]);
+
+      if (checkResult.length > 0) {
+        console.log(
+          `⚠️  there are danger methods, such as \x1b[31m"${checkResult.join(
+            ", "
+          )}"\x1b[0m in \x1b[31m${controllerName.toUpperCase()}\x1b[0m PUBLIC controller ⚠️`
+        );
+      }
       loaderFile.push(
         controllerName === loadController.name
           ? controllerName

@@ -1,1 +1,1 @@
-module.exports = { ...require("./checkVal") };
+module.exports = { ...require("./checkVal"), ...require("./routerCheck") };

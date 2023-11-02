@@ -1,13 +1,10 @@
 const { Op } = require("sequelize");
 const models = require("@models");
-const { checkVal } = require("@utils");
+const { checkVal, defAnswer } = require("@utils");
 
 const getURI = (req, res) => {
   const { id } = req.params;
-  models.user
-    .findOne({ where: { id } })
-    .then((data) => res.send(data))
-    .catch((err) => res.status(500).send(err));
+  models.user.findOne({ where: { id } }).defAnswer(res);
   return;
 };
 
@@ -37,21 +34,14 @@ const get = (req, res) => {
           };
         }),
       };
-      res.send(result);
+      return result;
     })
-    .catch((err) => res.status(500).send(err));
+    .defAnswer(res, 401, { msg: "Auth Error" });
 };
 
 const update = (req, res) => {
   const { id, ...other } = req.body;
-  models.user
-    .update(other, { where: { id } })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  models.user.update(other, { where: { id } }).defAnswer(res);
 };
 
 module.exports = (router) => {
