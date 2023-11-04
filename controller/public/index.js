@@ -44,7 +44,7 @@ findFile.forEach((item) => {
 
   if (typeof controller === "function") {
     const router = Router();
-    router.use(jwtMiddleware);
+    //router.use(jwtMiddleware);
     const loadController = controller(router, controllerName);
 
     if (loadController) {

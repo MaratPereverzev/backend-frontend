@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const models = require("@models");
 const { checkVal, defAnswer } = require("@utils");
+const { getMediaPath } = require("@utils");
 
 const getURI = (req, res) => {
   const { id } = req.params;
@@ -45,9 +46,17 @@ const update = (req, res) => {
 };
 
 const post = (req, res) => {
-  console.log(req.files);
+  const files = Object.keys(req.files);
 
-  res.defAnswer();
+  for (const file of files) {
+    const item = req.files[file];
+
+    const mediaPath = getMediaPath(
+      item.mimetype ? item.mimetype.split("/")[0] : null
+    );
+
+    item.mv(`${mediaPath}${item.md5}`);
+  }
 };
 module.exports = (router) => {
   router.get("/", get);

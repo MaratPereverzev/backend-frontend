@@ -12,7 +12,7 @@ const get = (req, res) => {
   }
   model.findAll().defAnswer(res);
 };
-
+/*
 const post = (req, res) => {
   const { ...other } = req.body;
   model.create(other).defAnswer(res);
@@ -30,12 +30,13 @@ const del = (req, res) => {
     model.destroy({ where: { id } }).defAnswer(res);
   }
 };
+*/
 
 module.exports = (router, moduleName) => {
   router.get("/", get);
-  router.post("/", post);
-  router.put("/", checkVal(["id", "body"]), put);
-  router.delete("/", checkVal(["id", "body"]), del);
+  //router.post("/", post);
+  //router.put("/", checkVal(["id", "body"]), put);
+  //router.delete("/", checkVal(["id", "body"]), del);
 
   return router;
 };

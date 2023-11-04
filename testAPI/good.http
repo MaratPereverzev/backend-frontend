@@ -1,0 +1,10 @@
+POST http://localhost:8080/good
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiY2FwdGlvbiI6Im1hcmF0IiwiZGVzY3JpcHRpb24iOiJxd2VydHkifQ.3b3fvIcNW0G_fwMQ7C79of70uy860cRPQXV7P4qFPNo
+Content-Type: multipart/form-data; boundary=MfnBoundry
+
+--MfnBoundry
+Content-Disposition: form-data; name="image"; filename="1.jpg"
+Content-Type: image/*
+
+< C:\\Users\marat\Desktop\1.jpg
+--MfnBoundry--

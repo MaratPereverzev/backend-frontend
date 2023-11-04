@@ -3,15 +3,18 @@ require("@config");
 require("@events");
 const express = require("express");
 const controllers = require("@controller");
-const app = express();
 const wsServer = require("./wsServer");
+const fileUpload = require("express-fileupload");
 const models = require("@models");
 
-app.use(express.json());
+const app = express();
 
 if (typeof wsServer === "function") {
   wsServer(app);
 }
+
+app.use(express.json());
+app.use(fileUpload());
 
 Object.keys(controllers).forEach((key) => {
   if (Array.isArray(controllers[key])) {
@@ -26,11 +29,15 @@ Object.keys(controllers).forEach((key) => {
 app.listen(8080, () => {
   console.log("a server is listening on port: 8080");
 });
-
+/*
+models.userRole.findAll().then((data) => {
+  data.forEach((item) => console.log(item.toJSON()));
+});
+*/
 /*
 models.userRole.create({
   caption: "auto create",
-  controller: "user",
+  controller: "good",
   userId: 5,
 });
 */

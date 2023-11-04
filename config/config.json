@@ -4,7 +4,8 @@
     "password": "postgres",
     "database": "swan",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": null
   },
   "test": {
     "username": "postgres",
