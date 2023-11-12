@@ -49,8 +49,9 @@ const jwtMiddleware = async (req, res, next) => {
     next();
     return;
   }
+
   res.status(401).send({
-    error: `user '${req.userData?.caption}' doesn't have access to user/get`,
+    error: `user '${req.userData?.caption}' doesn't have access to ${req.baseUrl}`,
   });
 };
 

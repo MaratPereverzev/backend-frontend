@@ -1,2 +1,10 @@
-GET http://localhost:8080/media?fileId=1.jpg
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiY2FwdGlvbiI6Im1hcmF0IiwiZGVzY3JpcHRpb24iOiJxd2VydHkifQ.3b3fvIcNW0G_fwMQ7C79of70uy860cRPQXV7P4qFPNo
+POST http://localhost:8080/media?fileId=1.jpg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJtYXJhdCIsInBhc3N3b3JkIjoiMTIzMzIxIn0.twYu50bfah6o43xpqfeuf4gsjEvfQ4A5C3xrTmxrSGk
+Content-Type: multipart/form-data; boundary=MfnBoundry
+
+--MfnBoundry
+Content-Disposition: form-data; name="image"; filename="1.jpg"
+Content-Type: image/*
+
+< C:\\Users\marat\Desktop\1.jpg
+--MfnBoundry--

@@ -1,5 +1,5 @@
-http://localhost:8080/user
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiY2FwdGlvbiI6Im1hcmF0IiwiZGVzY3JpcHRpb24iOiJxd2VydHkifQ.3b3fvIcNW0G_fwMQ7C79of70uy860cRPQXV7P4qFPNo
+GET http://localhost:8080/user
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXB0aW9uIjoibWFyYXQiLCJkZXNjcmlwdGlvbiI6Im5pY2UiLCJpZCI6IjEifQ.nYeybvPfTAXUtmqRFsroeQfF0ZrdKnzsXnctCPBCVSY
 ###
 
 PUT http://localhost:8080/user

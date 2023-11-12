@@ -1,7 +1,8 @@
-const { Op } = require("sequelize");
 const models = require("@models");
-const { checkVal, defAnswer } = require("@utils");
-const { getMediaPath } = require("@utils");
+const { getMediaPath, checkVal } = require("@utils");
+const fs = require("fs");
+
+const name = "media";
 
 const post = (req, res) => {
   const files = Object.keys(req.files);
@@ -16,22 +17,14 @@ const post = (req, res) => {
         mimeType: item.mimeType,
         fileId: item.md5,
       })
-      .then((media) => {
-        models.document.create({ caption, description, mediaId: media?.id });
-        return;
-      })
-      .catch((err) => {
-        console.log("ERROR CREATE MODEL DATA", err);
-      });
+      .defAnswer(res);
 
     item.mv(`${getMediaPath()}${item.md5}`);
   }
 };
-module.exports = (router) => {
+
+module.exports = (router, moduleName) => {
   router.post("/", post);
 
   return router;
-  /*
-  router.delete("/", del);
-  */
 };

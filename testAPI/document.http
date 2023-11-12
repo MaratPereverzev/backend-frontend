@@ -1,0 +1,23 @@
+POST http://localhost:8080/document
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJtYXJhdCIsInBhc3N3b3JkIjoiMTIzMzIxIn0.twYu50bfah6o43xpqfeuf4gsjEvfQ4A5C3xrTmxrSGk
+Content-Type: multipart/form-data; boundary=MfnBoundry
+
+--MfnBoundry
+Content-Disposition: form-data; name="document"; filename="test.xlsx"
+Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+< C:\\Users\marat\Desktop\test.xlsx
+--MfnBoundry--
+
+###
+
+GET http://localhost:8080/document?fileId=4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJtYXJhdCIsInBhc3N3b3JkIjoiMTIzMzIxIn0.twYu50bfah6o43xpqfeuf4gsjEvfQ4A5C3xrTmxrSGk
+Content-Type: multipart/form-data; boundary=MfnBoundry
+
+--MfnBoundry
+Content-Disposition: form-data; name="image"; filename="1.jpg"
+Content-Type: image/*
+
+< C:\\Users\marat\Desktop\1.jpg
+--MfnBoundry--

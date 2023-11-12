@@ -6,6 +6,7 @@ const controllers = require("@controller");
 const wsServer = require("./wsServer");
 const fileUpload = require("express-fileupload");
 const models = require("@models");
+const { jwtCreate } = require("@utils");
 
 const app = express();
 
@@ -38,7 +39,8 @@ models.userRole.findAll().then((data) => {
 models.userRole.create({
   caption: "auto create",
   controller: "good",
-  userId: 5,
+  userId: 1,
 });
 */
 //models.user.create({ login: "marat", password: "123321" });
+//console.log(jwtCreate({ id: 1, login: "marat", password: "123321" }, "123"));
