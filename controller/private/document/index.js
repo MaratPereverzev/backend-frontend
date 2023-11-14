@@ -11,7 +11,7 @@ const get = (req, res) => {
     models.document
       .findOne({
         include: [{ model: models.media, as: "media" }],
-        where: { id: fileId },
+        where: { fileId },
       })
       .then((data) => {
         if (data) {

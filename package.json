@@ -34,7 +34,6 @@
     "sequelize": "^6.33.0",
     "sequelize-cli": "^6.6.1",
     "sequelize-mig": "github:sacredneobi/sequelize-mig",
-    "xlsx": "^0.18.5",
-    "zlib": "^1.0.5"
+    "xlsx": "^0.18.5"
   }
 }
