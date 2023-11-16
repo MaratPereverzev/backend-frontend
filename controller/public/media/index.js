@@ -19,10 +19,12 @@ const get = async (req, res) => {
         "Content-Range": `bytes 0-*/${fileData.size}`,
       };
 
+      console.log(header);
       const file = fs.createReadStream(`${getMediaPath()}${fileId}`);
 
       if (req.acceptsEncodings("deflate") === "deflate") {
         res.writeHead(200, { ...header, "Content-Encoding": "deflate" });
+        console.log(res);
         file.pipe(zlib.createDeflate()).pipe(res);
       } else if (req.acceptsEncodings("gzip") === "gzip") {
         res.writeHead(200, { ...header, "Content-Encoding": "gzip" });
@@ -42,6 +44,5 @@ const get = async (req, res) => {
 
 module.exports = (router, moduleName) => {
   router.get("/", checkVal(["fileId"], "query"), get);
-
   return router;
 };

@@ -1,14 +1,14 @@
 const path = require("path");
 const basename = path.basename(__filename);
-const file = require("file");
 const { Router } = require("express");
 const { capitalizeFirstLetterWithoutIndex, jwtMiddleware } = require("@utils");
+const { walkDir } = require("@utils/file");
 
 const controllers = [];
 const findFile = [];
 
 //find all models in /models directory
-file.walkSync(__dirname, (dir, dirs, files) => {
+walkDir(__dirname, (dir, files) => {
   files
     .filter((item) => {
       //filter models & add them to findFile array

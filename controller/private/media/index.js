@@ -9,7 +9,6 @@ const post = (req, res) => {
 
   for (const file of files) {
     const item = req.files[file];
-
     const mediaData = models.media
       .create({
         name: item.name,
@@ -18,7 +17,6 @@ const post = (req, res) => {
         fileId: item.md5,
       })
       .defAnswer(res);
-
     item.mv(`${getMediaPath()}${item.md5}`);
   }
 };

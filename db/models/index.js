@@ -2,8 +2,8 @@ require("module-alias/register");
 const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
-const file = require("file");
 const config = require("@config/config.json")["development"];
+const { walkDir } = require("@utils/file");
 const db = {};
 
 const capitalizeFirstLetterWithoutIndex = (str) => {
@@ -33,7 +33,7 @@ if (config.use_env_variable) {
 //find all models in /models directory
 const findFile = [];
 
-file.walkSync(__dirname, (dir, dirs, files) => {
+walkDir(__dirname, (dir, files) => {
   files
     .filter((item) => {
       //filter models & add them to findFile array
