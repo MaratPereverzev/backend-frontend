@@ -6,6 +6,16 @@ module.exports = (db, defOptions, modelName) => {
     {
       caption: DataTypes.TEXT,
       description: DataTypes.TEXT,
+      count: DataTypes.INTEGER,
+      price: DataTypes.FLOAT,
+      full: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          const count = this.getDataValue("count");
+          const price = this.getDataValue("price");
+          return count * price;
+        },
+      },
     },
     defOptions
   );

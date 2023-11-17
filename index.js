@@ -30,6 +30,11 @@ Object.keys(controllers).forEach((key) => {
 app.listen(8080, () => {
   console.log("a server is listening on port: 8080");
 });
+
+//models.good.create({ caption: "test", count: 10, price: 2.5 });
+models.good
+  .findOne({ where: { caption: "test" } })
+  .then((data) => console.log(data.full));
 /*
 models.media.findAll().then((data) => {
   data.forEach((item) => console.log(item.toJSON()));
