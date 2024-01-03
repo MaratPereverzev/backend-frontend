@@ -28,7 +28,7 @@ const Default = (props) => {
   }
 
   if (grow) {
-    newSx.grow = grow === true ? 1 : parseFloat(grow) ?? grow;
+    newSx.flexGrow = grow === true ? 1 : parseFloat(grow) ?? grow;
   }
 
   return <Box sx={{ ...newSx, ...sx }} {...other} />;
