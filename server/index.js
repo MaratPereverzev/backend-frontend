@@ -1,18 +1,13 @@
 require("module-alias/register");
-require("@config");
+const { app } = require("@config");
 require("@events");
-const express = require("express");
-const wsServer = require("./wsServer");
-const fileUpload = require("express-fileupload");
+
 const initLoad = require("@controller");
-const app = express();
+const wsServer = require("./wsServer");
 
 if (typeof wsServer === "function") {
   wsServer(app);
 }
-
-app.use(express.json());
-app.use(fileUpload());
 
 if (typeof initLoad === "function") {
   initLoad(app);

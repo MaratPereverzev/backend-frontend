@@ -2,8 +2,9 @@ require("module-alias/register");
 const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
-const config = require("@config/config.json")["development"];
+const config = require("@config/config.json")["db"];
 const { walkDir } = require("@utils/file");
+const { ErrorLoaderFile } = require("@utils/class");
 const db = {};
 
 const capitalizeFirstLetterWithoutIndex = (str) => {
@@ -19,16 +20,13 @@ const defOptions = {
 
 //define a sequelize config
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
-  );
-}
+
+sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  config
+);
 
 //find all models in /models directory
 const findFile = [];
@@ -76,6 +74,8 @@ findFile.forEach((item) => {
           : `${modelName} (${loadModel.name})`
       );
       db[loadModel.name] = loadModel;
+    } else {
+      throw ErrorLoaderFile;
     }
   }
 });

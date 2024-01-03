@@ -1,4 +1,4 @@
-const { MyEvents } = require("@class");
+const { MyEvents } = require("@utils/class");
 
 const myEvents = new MyEvents();
 

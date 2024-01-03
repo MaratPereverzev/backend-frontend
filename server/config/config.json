@@ -1,25 +1,11 @@
 {
-  "development": {
+  "db": {
     "username": "postgres",
     "password": "postgres",
     "database": "swan",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "logging": null
-  },
-  "test": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "swan",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-  },
-  "production": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "swan",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
   },
   "jwt": "123"
 }
