@@ -1,0 +1,38 @@
+{
+  "name": "backend-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mic": "npx sequelize-mig migration:make -n",
+    "mip": "npx sequelize-mig migration:make --preview",
+    "miu": "npx sequelize-cli db:seed:undo",
+    "mi": "npx sequelize-cli db:migrate"
+  },
+  "_moduleAliases": {
+    "@utils": "utils",
+    "@models": "db/models",
+    "@config": "config",
+    "@class": "class",
+    "@controller": "controller",
+    "@events": "events"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.2",
+    "express-ws": "^5.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "nodemon": "^3.0.2",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.33.0",
+    "sequelize-cli": "^6.6.1",
+    "sequelize-mig": "github:sacredneobi/sequelize-mig",
+    "xlsx": "^0.18.5"
+  }
+}

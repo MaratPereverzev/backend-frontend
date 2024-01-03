@@ -1,4 +1,4 @@
-GET http://localhost:8080/user
+GET http://localhost:8080/api/good
 authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXB0aW9uIjoibWFyYXQiLCJkZXNjcmlwdGlvbiI6Im5pY2UiLCJpZCI6IjEifQ.nYeybvPfTAXUtmqRFsroeQfF0ZrdKnzsXnctCPBCVSY
 ###
 

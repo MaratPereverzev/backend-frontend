@@ -16,7 +16,9 @@ const jwtVal = (token) =>
   });
 
 const jwtMiddleware = async (req, res, next) => {
-  const { authorization } = req.headers;
+  const { authorization: authorizationProps } = req.headers;
+
+  const authorization = authorizationProps?.replaceAll("JWT ", "");
 
   if (!authorization || !jwtVal(authorization)) {
     res.status(401).send("user not found");

@@ -2,12 +2,9 @@ require("module-alias/register");
 require("@config");
 require("@events");
 const express = require("express");
-const controllers = require("@controller");
 const wsServer = require("./wsServer");
 const fileUpload = require("express-fileupload");
-const models = require("@models");
-const { jwtCreate } = require("@utils");
-
+const initLoad = require("@controller");
 const app = express();
 
 if (typeof wsServer === "function") {
@@ -17,24 +14,20 @@ if (typeof wsServer === "function") {
 app.use(express.json());
 app.use(fileUpload());
 
-Object.keys(controllers).forEach((key) => {
-  if (Array.isArray(controllers[key])) {
-    controllers[key].forEach((item) => {
-      if (item.name && item.router) {
-        app.use(item.name, item.router);
-      }
-    });
-  }
-});
+if (typeof initLoad === "function") {
+  initLoad(app);
+}
 
 app.listen(8080, () => {
   console.log("a server is listening on port: 8080");
 });
 
 //models.good.create({ caption: "test", count: 10, price: 2.5 });
+/*
 models.good
   .findOne({ where: { caption: "test" } })
   .then((data) => console.log(data.full));
+*/
 /*
 models.media.findAll().then((data) => {
   data.forEach((item) => console.log(item.toJSON()));

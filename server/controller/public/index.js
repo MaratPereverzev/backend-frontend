@@ -2,6 +2,7 @@ const path = require("path");
 const basename = path.basename(__filename);
 const { Router } = require("express");
 const { capitalizeFirstLetterWithoutIndex, jwtMiddleware } = require("@utils");
+const { routerCheck } = require("@utils");
 const { walkDir } = require("@utils/file");
 
 const controllers = [];
@@ -43,10 +44,19 @@ findFile.forEach((item) => {
 
   if (typeof controller === "function") {
     const router = Router();
-    router.use(jwtMiddleware);
+    //router.use(jwtMiddleware);
     const loadController = controller(router, controllerName);
 
     if (loadController) {
+      const checkResult = routerCheck(router, ["put", "post", "delete"]);
+
+      if (checkResult.length > 0) {
+        console.log(
+          `⚠️  there are danger methods, such as \x1b[31m"${checkResult.join(
+            ", "
+          )}"\x1b[0m in \x1b[31m${controllerName.toUpperCase()}\x1b[0m PUBLIC controller ⚠️`
+        );
+      }
       loaderFile.push(
         controllerName === loadController.name
           ? controllerName
@@ -61,13 +71,12 @@ findFile.forEach((item) => {
 if (typeof console.logUserDone === "function") {
   console.logUserDone(
     "SYSTEM",
-    `Controllers PRIVATE: \n ${loaderFile.join(", ")}`
+    `Controllers PUBLIC: \n ${loaderFile.join(", ")}`
   );
 } else {
-  console.log("SYSTEM", `Controllers PRIVATE: \n ${loaderFile.join(", ")}`);
+  console.log("SYSTEM", `Controllers PUBLIC: \n ${loaderFile.join(", ")}`);
 }
 
-process.controllers = {};
-process.controllers.private = loaderFile;
+process.controllers.public = loaderFile;
 
-module.exports = controllers;
+module.exports = { path: "/api", controllers };
