@@ -5,10 +5,15 @@ import { Text } from "../text";
 const Default = (props) => {
   const { caption, sxBox, sxText, propsBox, propsText, ...other } = props;
 
+  const textIsString = typeof caption === "string";
   return (
     <Button variant="contained" {...other}>
       <Box defFlex center row gap {...propsBox} sx={{ ...sxBox }}>
-        <Text caption={caption} {...propsText} sx={{ ...sxText }}></Text>
+        {textIsString ? (
+          <Text caption={caption} {...propsText} sx={{ ...sxText }}></Text>
+        ) : (
+          caption
+        )}
         {other.children}
       </Box>
     </Button>
