@@ -1,5 +1,6 @@
 import { Box, Divider, MenuButton, Text, Icon } from "@components";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+
 const MyButton = (props) => {
   const { name, open, ...other } = props;
 
@@ -12,7 +13,12 @@ const MyButton = (props) => {
           {open && (
             <Text
               caption={name}
-              sx={{ fontSize: 14, textTransform: "capitalize" }}
+              sx={{
+                fontSize: 16,
+                textTransform: "capitalize",
+                opacity: open ? 1 : 0,
+                transition: "opacity 100ms ease-in-out",
+              }}
             />
           )}
         </>
@@ -29,6 +35,14 @@ const MyButton = (props) => {
 };
 const Default = () => {
   const [open, setOpen] = useState(true);
+
+  const leftPanelOpen = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("leftPane", open);
+  }, [open]);
 
   return (
     <Box defFlex row grow>
@@ -53,7 +67,15 @@ const Default = () => {
         >
           <Box defFlex ai row gap sx={{ height: 32 }}>
             <Icon name="logo" sx={{ fontSize: 39, width: 40, height: 40 }} />
-            {open && <Text caption="React" />}
+            {open && (
+              <Text
+                caption="React"
+                sx={{
+                  opacity: open ? 1 : 0,
+                  transition: "opacity 100ms ease-in-out",
+                }}
+              />
+            )}
           </Box>
           <Divider sx={{ my: 1.5 }} />
           <Box defFlex gap={1.5} grow>
@@ -64,12 +86,12 @@ const Default = () => {
             <MyButton
               name={open ? "close" : "open"}
               open={open}
-              onClick={() => setOpen((prev) => !prev)}
+              onClick={leftPanelOpen}
             />
           </Box>
         </Box>
       </Box>
-      <Box component="pages" grow />
+      <Box grow />
     </Box>
   );
 };

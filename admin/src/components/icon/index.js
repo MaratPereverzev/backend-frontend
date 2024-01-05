@@ -1,4 +1,4 @@
-import { Box } from "../box";
+import { Icon } from "@mui/material";
 
 const iconData = {
   home: "Home",
@@ -9,19 +9,19 @@ const iconData = {
   defIcon: "Block",
 };
 
-const Icon = (props) => {
+const Default = (props) => {
   const { name, sx, ...other } = props;
   const icon = iconData[name] ?? iconData["defIcon"];
 
   return (
-    <Box
+    <Icon
       className="material-symbols-rounded"
       sx={{ height: 24, width: 24, ...sx }}
       {...other}
     >
       {icon}
-    </Box>
+    </Icon>
   );
 };
 
-export { Icon };
+export { Default as Icon };
