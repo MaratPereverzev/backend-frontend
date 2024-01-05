@@ -1,7 +1,7 @@
 import { Box, Divider, MenuButton, Text, Icon } from "@components";
-
+import { useState } from "react";
 const MyButton = (props) => {
-  const { name } = props;
+  const { name, open, ...other } = props;
 
   return (
     <MenuButton
@@ -9,20 +9,38 @@ const MyButton = (props) => {
       caption={
         <>
           <Icon name={name} />
-          <Text
-            caption={name}
-            sx={{ fontSize: 14, textTransform: "capitalize" }}
-          />
+          {open && (
+            <Text
+              caption={name}
+              sx={{ fontSize: 14, textTransform: "capitalize" }}
+            />
+          )}
         </>
       }
-      sx={{ justifyContent: "flex-start", borderRadius: 2, minHeight: 40 }}
+      sx={{
+        justifyContent: "flex-start",
+        borderRadius: 2,
+        minHeight: 40,
+        minWidth: 0,
+      }}
+      {...other}
     />
   );
 };
 const Default = () => {
+  const [open, setOpen] = useState(true);
+
   return (
     <Box defFlex row grow>
-      <Box defFlex gap sx={{ width: 240, p: 2 }}>
+      <Box
+        defFlex
+        gap
+        sx={{
+          width: open ? 200 : 54,
+          p: 2,
+          transition: "width 100ms ease-out",
+        }}
+      >
         <Box
           defFlex
           grow
@@ -34,16 +52,20 @@ const Default = () => {
           }}
         >
           <Box defFlex ai row gap sx={{ height: 32 }}>
-            <Icon name="logo" sx={{ fontSize: 46, width: 46, height: 46 }} />
-            <Text caption="React"></Text>
+            <Icon name="logo" sx={{ fontSize: 39, width: 40, height: 40 }} />
+            {open && <Text caption="React" />}
           </Box>
           <Divider sx={{ my: 1.5 }} />
           <Box defFlex gap={1.5} grow>
-            <MyButton name="home" />
-            <MyButton name="portfolio" />
+            <MyButton name="home" open={open} />
+            <MyButton name="portfolio" open={open} />
           </Box>
           <Box defFlex>
-            <MyButton name="close" />
+            <MyButton
+              name={open ? "close" : "open"}
+              open={open}
+              onClick={() => setOpen((prev) => !prev)}
+            />
           </Box>
         </Box>
       </Box>
