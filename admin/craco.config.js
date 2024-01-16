@@ -15,6 +15,7 @@ module.exports = {
       "@data": resolvePath("./src/data"),
       "@hooks": resolvePath("./src/hooks"),
       "@utils": resolvePath("./src/utils"),
+      "@pages": resolvePath("./src/pages"),
     },
   },
   eslint: false,
