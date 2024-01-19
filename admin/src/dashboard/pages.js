@@ -1,25 +1,26 @@
 import { Box } from "@components";
 import { useState, useEffect } from "react";
 import { addEvent, dispatch } from "@hooks";
-import { Home } from "../pages";
+import { setPageHash, getPageHash } from "@utils";
+import { Goods } from "../pages";
 
 const Default = (props) => {
-  const [route, setRoute] = useState(window.location.hash.replace("#", ""));
+  const [route, setRoute] = useState(getPageHash());
 
   useEffect(() => {
-    const event = () => {
-      setRoute(window.location.hash.replace("#", ""));
-    };
-
-    window.addEventListener("hashchange", event, false);
-    return () => {
-      window.removeEventListener("hashchange", event);
-    };
+    addEvent(
+      "hashchange",
+      () => {
+        setRoute(getPageHash());
+      },
+      window,
+      false
+    );
   }, []);
 
   useEffect(() => {
     return addEvent("route", (data) => {
-      window.location.hash = data.detail.route;
+      setPageHash(data.detail.route);
       dispatch("closeSideBar");
     });
   }, []);
@@ -35,7 +36,7 @@ const Default = (props) => {
         ...sx,
       }}
     >
-      {(route === "home" || !route) && <Home />}
+      {(route === "goods" || !route) && <Goods />}
     </Box>
   );
 };

@@ -1,12 +1,12 @@
-const addEvent = (eventName, event) => {
+const addEvent = (eventName, event, field = document, ...args) => {
   const localEvent = (data) => {
     event(data);
   };
 
-  document.addEventListener(eventName, localEvent);
+  field.addEventListener(eventName, localEvent, ...args);
 
   return () => {
-    document.removeEventListener(eventName, localEvent);
+    field.removeEventListener(eventName, localEvent);
   };
 };
 

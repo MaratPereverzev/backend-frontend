@@ -1,12 +1,14 @@
 import { Icon } from "@mui/material";
 
 const iconData = {
-  home: "Home",
-  portfolio: "Person",
+  goods: "shopping_cart",
+  orders: "receipt_long",
   open: "keyboard_tab",
   close: "keyboard_tab_rtl",
   logo: "polymer",
   defIcon: "Block",
+  search: "search",
+  settings: "settings",
 };
 
 const Default = (props) => {
