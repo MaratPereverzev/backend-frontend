@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { Box } from "../box";
 import { Text } from "../text";
 import { Icon } from "../icon";
@@ -47,4 +47,14 @@ const Delete = (props) => {
 const MenuButton = (props) => {
   return <Default variant="text" {...props}></Default>;
 };
-export { Default as Button, Delete as ButtonDelete, MenuButton };
+
+const ButtonIcon = (props) => {
+  const { name, sx, sxIcon } = props;
+
+  return (
+    <IconButton sx={{ ...sx }}>
+      <Icon name={name} sx={{ ...sxIcon }} />
+    </IconButton>
+  );
+};
+export { Default as Button, Delete as ButtonDelete, MenuButton, ButtonIcon };

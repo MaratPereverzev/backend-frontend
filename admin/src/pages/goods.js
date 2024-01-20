@@ -1,29 +1,20 @@
-import { Table, Button } from "@components";
+import { Table, ButtonIcon, Box } from "@components";
 
 const Default = () => {
   return (
     <Table
       topButtons={
-        <>
-          <Button
-            icon="search"
-            sxIcon={{ fontSize: 20, height: 20, width: 20 }}
-            sx={{ borderTopRightRadius: 10 }}
-            variant="outlined"
-          />
-        </>
+        <Box>
+          <ButtonIcon name="search" />
+          <ButtonIcon name="filter" />
+        </Box>
       }
       bottomButtons={
         <>
-          <Button
-            icon="settings"
-            sxIcon={{ fontSize: 20, height: 20, width: 20 }}
-            sx={{ borderBottomRightRadius: 10 }}
-            variant="outlined"
-          />
+          <ButtonIcon name="settings" sxIcon={{ fontSize: 20 }} />
         </>
       }
-      items={new Array(70).fill(null).map((_, index) => ({
+      items={new Array(10).fill(null).map((_, index) => ({
         id: index,
         caption: `good №${index}`,
       }))}

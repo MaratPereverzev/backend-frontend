@@ -9,6 +9,7 @@ const iconData = {
   defIcon: "Block",
   search: "search",
   settings: "settings",
+  filter: "filter_alt",
 };
 
 const Default = (props) => {
