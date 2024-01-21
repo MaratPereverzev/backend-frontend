@@ -17,7 +17,7 @@ const context = createContext(null);
 
 const useDashboard = useContext(context);
 
-const Context = () => {
+const Context = (props) => {
   <context.Provider
     value={new DashboardStore()}
     name="DASHBOARD CONTEXT"

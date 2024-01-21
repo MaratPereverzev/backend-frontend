@@ -19,7 +19,6 @@ const Default = (props) => {
   } = props;
 
   const [search, setSearch] = useState("");
-  const [checked, setChecked] = useState([]);
 
   return (
     <Box name="table" defFlex gap sx={{ width: "100%", height: "100%", ...sx }}>
@@ -83,7 +82,7 @@ const Default = (props) => {
         name="content"
         sx={{ height: "1px", overflowY: "scroll", ...sxContent }}
       >
-        <Rows checked={checked} setChecked={setChecked} items={items} />
+        <Rows items={items} />
       </Box>
       <Divider variant="middle" flexItem />
       <Box defFlex jc="space-between" row name="footer" sx={{ ...sxFooter }}>
