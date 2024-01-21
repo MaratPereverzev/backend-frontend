@@ -1,33 +1,34 @@
 import { Input } from "../searchBar";
 import { Box } from "../box";
+import Rows from "./rows";
 import { useState } from "react";
-import { Pagination, Divider, Stack, Checkbox } from "@mui/material";
+import { Pagination, Divider, Stack } from "@mui/material";
 
 const defStyle = { sxIcon: { fontSize: 20 } };
+
 const Default = (props) => {
   const {
     items,
     bottomButtons,
     topButtons,
     onSearch,
-    /*
     sx,
     sxHeader,
     sxContent,
     sxFooter,
-    */
   } = props;
+
   const [search, setSearch] = useState("");
   const [checked, setChecked] = useState([]);
 
   return (
-    <Box name="table" defFlex gap sx={{ width: "100%", height: "100%" }}>
+    <Box name="table" defFlex gap sx={{ width: "100%", height: "100%", ...sx }}>
       <Box
         defFlex
         gap
         row
         name="header"
-        sx={{ width: "100%", boxSizing: "border-box", p: 0.5 }}
+        sx={{ width: "100%", boxSizing: "border-box", p: 0.5, ...sxHeader }}
       >
         <Input
           size="small"
@@ -80,34 +81,12 @@ const Default = (props) => {
         gap
         grow
         name="content"
-        sx={{ height: "1px", overflowY: "scroll" }}
+        sx={{ height: "1px", overflowY: "scroll", ...sxContent }}
       >
-        <Stack divider={<Divider variant="middle" flexItem />}>
-          {items?.map((item, index) => (
-            <Box key={item?.id ?? index} sx={{ p: 1 }}>
-              <Checkbox
-                checked={!!checked.find((checked) => checked.id === item?.id)}
-                size="small"
-                onChange={({ target }) => {
-                  if (target.checked) {
-                    setChecked((prev) => {
-                      prev.push({ id: item?.id });
-                      return [...prev];
-                    });
-                  } else {
-                    setChecked((prev) =>
-                      prev.filter((checked) => checked.id !== item?.id)
-                    );
-                  }
-                }}
-              />
-              {item?.caption}
-            </Box>
-          ))}
-        </Stack>
+        <Rows checked={checked} setChecked={setChecked} items={items} />
       </Box>
       <Divider variant="middle" flexItem />
-      <Box defFlex jc="space-between" row name="footer">
+      <Box defFlex jc="space-between" row name="footer" sx={{ ...sxFooter }}>
         {bottomButtons}
         <Pagination count={10} hidePrevButton hideNextButton />
       </Box>
