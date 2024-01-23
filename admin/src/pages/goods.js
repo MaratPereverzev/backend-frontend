@@ -18,6 +18,7 @@ const Default = () => {
         id: index,
         caption: `good №${index}`,
       }))}
+      name="goods"
     />
   );
 };

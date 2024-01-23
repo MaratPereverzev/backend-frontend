@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 
 class DashboardStore {
   constructor() {
-    this._token = value;
+    this._token = "";
   }
 
   get token() {
@@ -15,14 +15,16 @@ class DashboardStore {
 
 const context = createContext(null);
 
-const useDashboard = useContext(context);
+const useDashboard = () => useContext(context);
 
 const Context = (props) => {
-  <context.Provider
-    value={new DashboardStore()}
-    name="DASHBOARD CONTEXT"
-    {...props}
-  />;
+  return (
+    <context.Provider
+      value={new DashboardStore()}
+      name="DASHBOARD CONTEXT"
+      {...props}
+    />
+  );
 };
 
 export { Context as DashboardContext, useDashboard };

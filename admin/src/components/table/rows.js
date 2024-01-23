@@ -1,11 +1,18 @@
 import { Divider, Stack } from "@mui/material";
 import Row from "./row";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { dispatch } from "@hooks";
+import { useTable } from "@context";
 
 const Default = (props) => {
   const [checked, setChecked] = useState([]);
-  const { items } = props;
+  const { items, name } = props;
+  const tableData = useTable();
 
+  useEffect(() => {
+    tableData.selected = checked;
+    dispatch(`${name}.selectChange`);
+  }, [name, checked, tableData]);
   if (!Array.isArray(items) || !items.length > 0) return null;
 
   return (
@@ -17,7 +24,10 @@ const Default = (props) => {
           <Row
             key={item?.id ?? index}
             checked={isChecked}
-            setChecked={setChecked}
+            setChecked={(data) => {
+              dispatch(`${name}.selectChange`);
+              setChecked(data);
+            }}
             item={item}
           />
         );

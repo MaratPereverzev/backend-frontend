@@ -1,23 +1,25 @@
 import { Input } from "../searchBar";
 import { Box } from "../box";
+import Footer from "./footer";
 import Rows from "./rows";
 import { useState } from "react";
-import { Pagination, Divider, Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
+import { TableContext } from "@context/table";
 
 const defStyle = { sxIcon: { fontSize: 20 } };
 
 const Default = (props) => {
   const {
+    name,
     items,
-    bottomButtons,
     topButtons,
+    bottomButtons,
     onSearch,
     sx,
     sxHeader,
     sxContent,
     sxFooter,
   } = props;
-
   const [search, setSearch] = useState("");
 
   return (
@@ -54,11 +56,12 @@ const Default = (props) => {
           ) : typeof topButtons.props.children === "function" ? (
             topButtons.props.children(defStyle)
           ) : Array.isArray(topButtons.props.children) ? (
-            topButtons.props.children.map((child) => {
+            topButtons.props.children.map((child, index) => {
               if (typeof chlid === "function") return child(defStyle);
               // в .type хранится сама компонента
               return (
                 <child.type
+                  key={child?.id ?? index}
                   {...child.props}
                   sxIcon={{
                     ...child.props.sxIcon,
@@ -82,15 +85,20 @@ const Default = (props) => {
         name="content"
         sx={{ height: "1px", overflowY: "scroll", ...sxContent }}
       >
-        <Rows items={items} />
+        <Rows items={items} name={name} />
       </Box>
       <Divider variant="middle" flexItem />
-      <Box defFlex jc="space-between" row name="footer" sx={{ ...sxFooter }}>
-        {bottomButtons}
-        <Pagination count={10} hidePrevButton hideNextButton />
-      </Box>
+      <Footer bottomButtons={bottomButtons} sxFooter={sxFooter} name={name} />
     </Box>
   );
 };
 
-export { Default as Table };
+const ContextTable = (props) => {
+  return (
+    <TableContext>
+      <Default {...props} />
+    </TableContext>
+  );
+};
+
+export { ContextTable as Table };

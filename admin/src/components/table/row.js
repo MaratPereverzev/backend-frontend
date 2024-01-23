@@ -9,7 +9,6 @@ function areEqual(prev, next) {
 }
 const Default = memo((props) => {
   const { checked, setChecked, item } = props;
-
   return (
     <Box sx={{ p: 1 }}>
       <Checkbox

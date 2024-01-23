@@ -1,20 +1,21 @@
 import { createContext, useContext } from "react";
-const context = createContext(null);
-
-const useTable = useContext(context);
 
 class TableStore {
   constructor() {
-    this._token = value;
+    this._selected = [];
   }
 
-  get token() {
-    return this._token;
+  get selected() {
+    return this._selected;
   }
-  set token(value) {
-    this._token = value;
+  set selected(value) {
+    this._selected = value;
   }
 }
+
+const context = createContext(null);
+
+const useTable = () => useContext(context);
 
 const Context = (props) => {
   return (

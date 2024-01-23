@@ -10,9 +10,14 @@ const MyButton = (props) => {
 
   useEffect(
     () =>
-      addEvent("changeActive", () => {
-        setActive(getPageHash() === name);
-      }),
+      addEvent(
+        "hashchange",
+        () => {
+          setActive(getPageHash() === name);
+        },
+        window,
+        false
+      ),
     [name]
   );
 
@@ -46,7 +51,6 @@ const MyButton = (props) => {
       }}
       onClick={() => {
         dispatch("route", { route: name });
-        dispatch("changeActive");
       }}
       {...other}
     />
