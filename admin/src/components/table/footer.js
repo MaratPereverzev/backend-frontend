@@ -1,12 +1,12 @@
 import { Box } from "../box";
 import { useTable } from "@context";
 import { Pagination, Typography } from "@mui/material";
-import { addEvent } from "@hooks";
+import { addEvent, dispatch } from "@hooks";
 import { useEffect, useState } from "react";
 
-const Default = (props) => {
+const CountSelect = (props) => {
+  const { name } = props;
   const [, setReload] = useState(false);
-  const { sxFooter, bottomButtons, name } = props;
   const tableData = useTable();
   useEffect(
     () =>
@@ -15,14 +15,26 @@ const Default = (props) => {
       }),
     [name]
   );
+  const count = Object.keys(tableData?.selected ?? {}).length;
+  return count > 0 ? (
+    <Typography
+      onClick={(e) => {
+        dispatch(`${name}.selectClear`);
+        e.stopPropagation();
+      }}
+    >
+      Кол-во выбранных элементов: {count}
+    </Typography>
+  ) : null;
+};
+
+const Default = (props) => {
+  const { sxFooter, bottomButtons, name } = props;
+
   return (
     <Box defFlex jc="space-between" row name="footer" sx={{ ...sxFooter }}>
       {bottomButtons}
-      {tableData?.selected?.length > 0 ? (
-        <Typography>
-          Кол-во выбранных элементов: {tableData.selected.length}
-        </Typography>
-      ) : null}
+      <CountSelect name={name} />
       <Pagination count={10} hidePrevButton hideNextButton />
     </Box>
   );

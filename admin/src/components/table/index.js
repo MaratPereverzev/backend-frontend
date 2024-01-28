@@ -5,7 +5,12 @@ import Rows from "./rows";
 import { useState } from "react";
 import { Divider, Stack } from "@mui/material";
 import { TableContext } from "@context/table";
-
+/*
+function areEqual(prev, next) {
+  console.log(prev, next);
+  return true;
+}
+*/
 const defStyle = { sxIcon: { fontSize: 20 } };
 
 const Default = (props) => {

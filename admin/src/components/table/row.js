@@ -1,6 +1,9 @@
 import { Box } from "../box";
 import { Checkbox } from "@mui/material";
 import { memo } from "react";
+import { useState, useEffect } from "react";
+import { useTable } from "@context";
+import { dispatch, addEvent } from "@hooks";
 
 function areEqual(prev, next) {
   const result =
@@ -8,26 +11,33 @@ function areEqual(prev, next) {
   return result;
 }
 const Default = memo((props) => {
-  const { checked, setChecked, item } = props;
+  const { item, name } = props;
+  const { id, caption } = item;
+  const [checked, setChecked] = useState(false);
+  const tableData = useTable();
+
+  useEffect(() => {
+    return addEvent(`${name}.selectClear`, () => {
+      setChecked(false);
+    });
+  }, [name]);
+
+  useEffect(() => {
+    if (checked) tableData.selected[id] = true;
+    else delete tableData.selected[id];
+    dispatch(`${name}.selectChange`);
+  }, [checked, tableData, id, name]);
+
   return (
     <Box sx={{ p: 1 }}>
       <Checkbox
         checked={checked}
         size="small"
-        onChange={({ target }) => {
-          if (target.checked) {
-            setChecked((prev) => {
-              prev.push({ id: item?.id });
-              return [...prev];
-            });
-          } else {
-            setChecked((prev) =>
-              prev.filter((checked) => checked.id !== item?.id)
-            );
-          }
+        onChange={() => {
+          setChecked((prev) => !prev);
         }}
       />
-      {item?.caption}
+      {caption}
     </Box>
   );
 }, areEqual);

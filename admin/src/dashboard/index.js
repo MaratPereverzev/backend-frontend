@@ -1,9 +1,21 @@
 import { Box, Divider, MenuButton, Text, Icon } from "@components";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { dispatch, addEvent } from "@hooks";
 import { getPageHash } from "@utils";
 import { Page } from "./pages";
 
+function areEqual() {
+  return true;
+}
+
+const Content = memo((props) => {
+  const { sx } = props;
+  return (
+    <Box defFlex grow sx={{ py: 2, pr: 2 }}>
+      <Page sx={{ ...sx }} />
+    </Box>
+  );
+}, areEqual);
 const MyButton = (props) => {
   const { name, sx, open, iconSx, caption, ...other } = props;
   const [active, setActive] = useState(getPageHash() === name);
@@ -112,16 +124,14 @@ const Default = () => {
           </Box>
         </Box>
       </Box>
-      <Box defFlex grow sx={{ py: 2, pr: 2 }}>
-        <Page
-          sx={{
-            p: 1,
-            pt: 1.5,
-            boxShadow: "0px 0px 15px 0px rgba(66, 68, 90, 0.47)",
-            borderRadius: 4,
-          }}
-        />
-      </Box>
+      <Content
+        sx={{
+          p: 1,
+          pt: 1.5,
+          boxShadow: "0px 0px 15px 0px rgba(66, 68, 90, 0.47)",
+          borderRadius: 4,
+        }}
+      />
     </Box>
   );
 };
