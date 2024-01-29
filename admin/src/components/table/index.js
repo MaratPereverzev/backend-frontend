@@ -2,29 +2,39 @@ import { Input } from "../searchBar";
 import { Box } from "../box";
 import Footer from "./footer";
 import Rows from "./rows";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { Divider, Stack } from "@mui/material";
 import { TableContext } from "@context/table";
-/*
+
 function areEqual(prev, next) {
-  console.log(prev, next);
-  return true;
+  let dontRender = true;
+
+  for (let item of Object.keys(prev)) {
+    if (prev[item]?.type) continue;
+    if (prev[item] !== next[item]) {
+      dontRender = false;
+      break;
+    }
+  }
+  return dontRender;
 }
-*/
-const defStyle = { sxIcon: { fontSize: 20 } };
+const defStyle = { sxIcon: { fontSize: 25 } };
 
 const Default = (props) => {
   const {
     name,
     items,
     topButtons,
-    bottomButtons,
+    bottomButton,
     onSearch,
     sx,
     sxHeader,
     sxContent,
     sxFooter,
+    onChangePage,
+    onRenderItem,
   } = props;
+
   const [search, setSearch] = useState("");
 
   return (
@@ -34,6 +44,7 @@ const Default = (props) => {
         gap
         row
         name="header"
+        ai
         sx={{ width: "100%", boxSizing: "border-box", p: 0.5, ...sxHeader }}
       >
         <Input
@@ -90,20 +101,25 @@ const Default = (props) => {
         name="content"
         sx={{ height: "1px", overflowY: "scroll", ...sxContent }}
       >
-        <Rows items={items} name={name} />
+        <Rows items={items} name={name} onRenderItem={onRenderItem} />
       </Box>
       <Divider variant="middle" flexItem />
-      <Footer bottomButtons={bottomButtons} sxFooter={sxFooter} name={name} />
+      <Footer
+        bottomButton={bottomButton}
+        sxFooter={sxFooter}
+        name={name}
+        onChangePage={onChangePage}
+      />
     </Box>
   );
 };
 
-const ContextTable = (props) => {
+const ContextTable = memo((props) => {
   return (
     <TableContext>
       <Default {...props} />
     </TableContext>
   );
-};
+}, areEqual);
 
 export { ContextTable as Table };

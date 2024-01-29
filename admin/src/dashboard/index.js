@@ -16,6 +16,7 @@ const Content = memo((props) => {
     </Box>
   );
 }, areEqual);
+
 const MyButton = (props) => {
   const { name, sx, open, iconSx, caption, ...other } = props;
   const [active, setActive] = useState(getPageHash() === name);

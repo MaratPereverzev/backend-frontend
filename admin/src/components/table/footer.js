@@ -3,6 +3,7 @@ import { useTable } from "@context";
 import { Pagination, Typography } from "@mui/material";
 import { addEvent, dispatch } from "@hooks";
 import { useEffect, useState } from "react";
+import Popover from "./popover";
 
 const CountSelect = (props) => {
   const { name } = props;
@@ -29,13 +30,22 @@ const CountSelect = (props) => {
 };
 
 const Default = (props) => {
-  const { sxFooter, bottomButtons, name } = props;
+  const { sxFooter, bottomButton, name, onChangePage } = props;
 
   return (
     <Box defFlex jc="space-between" row name="footer" sx={{ ...sxFooter }}>
-      {bottomButtons}
+      <Popover bottomButton={bottomButton} />
       <CountSelect name={name} />
-      <Pagination count={10} hidePrevButton hideNextButton />
+      <Pagination
+        count={10}
+        hidePrevButton
+        hideNextButton
+        onChange={(e, page) => {
+          if (typeof onChangePage === "function") {
+            onChangePage(name)(page);
+          }
+        }}
+      />
     </Box>
   );
 };

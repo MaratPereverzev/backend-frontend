@@ -7,11 +7,15 @@ import { dispatch, addEvent } from "@hooks";
 
 function areEqual(prev, next) {
   const result =
-    prev.checked === next.checked && prev.setChecked === next.setChecked;
+    prev.checked === next.checked &&
+    prev.setChecked === next.setChecked &&
+    prev.onRenderItem === next.onRenderItem &&
+    JSON.stringify(prev.item) === JSON.stringify(next.item);
   return result;
 }
+
 const Default = memo((props) => {
-  const { item, name } = props;
+  const { item, name, onRenderItem } = props;
   const { id, caption } = item;
   const [checked, setChecked] = useState(false);
   const tableData = useTable();
@@ -29,7 +33,7 @@ const Default = memo((props) => {
   }, [checked, tableData, id, name]);
 
   return (
-    <Box sx={{ p: 1 }}>
+    <Box defFlex row ai sx={{ p: 1 }}>
       <Checkbox
         checked={checked}
         size="small"
@@ -37,7 +41,13 @@ const Default = memo((props) => {
           setChecked((prev) => !prev);
         }}
       />
-      {caption}
+      {typeof onRenderItem === "function" ? (
+        <Box defFlex grow>
+          {onRenderItem(item)}
+        </Box>
+      ) : (
+        { caption }
+      )}
     </Box>
   );
 }, areEqual);
