@@ -8,7 +8,7 @@ import { useTable } from "@context";
 const Default = (props) => {
   const { name } = props;
   const [anchorEl, setAnchorEl] = useState(null);
-  const [, setReload] = useState(false);
+  const [showSelected, setShowSelected] = useState(false);
   const tableData = useTable();
 
   const handleClick = (event) => {
@@ -59,15 +59,23 @@ const Default = (props) => {
         <Box defFlex gap sx={{ p: 0.5 }}>
           <Button
             disabled={
-              Object.keys(tableData.selected ?? {}).length > 0 ? false : true
+              showSelected && Object.keys(tableData.selected ?? {}).length === 0
+                ? true
+                : false
             }
-            caption="Cнять выделения"
+            caption={showSelected ? "Cнять выделения" : "Выбрать элементы"}
             sx={{ m: 1 }}
             sxText={{ fontSize: 12 }}
             onClick={(e) => {
-              dispatch(`${name}.selectClear`);
+              if (showSelected) {
+                dispatch(`${name}.selectClear`);
+                dispatch(`${name}.selectCheckBox`, { show: false });
+                setShowSelected(false);
+              } else {
+                dispatch(`${name}.selectCheckBox`, { show: true });
+                setShowSelected(true);
+              }
               e.stopPropagation();
-              setReload((prev) => !prev);
             }}
           />
         </Box>

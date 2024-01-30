@@ -18,6 +18,7 @@ const Default = memo((props) => {
   const { item, name, onRenderItem } = props;
   const { id, caption } = item;
   const [checked, setChecked] = useState(false);
+  const [select, setSelect] = useState(false);
   const tableData = useTable();
 
   useEffect(() => {
@@ -32,15 +33,23 @@ const Default = memo((props) => {
     dispatch(`${name}.selectChange`);
   }, [checked, tableData, id, name]);
 
+  useEffect(() => {
+    return addEvent(`${name}.selectCheckBox`, (data) => {
+      setSelect(data?.detail?.show);
+    });
+  });
+
   return (
     <Box defFlex row ai sx={{ p: 1 }}>
-      <Checkbox
-        checked={checked}
-        size="small"
-        onChange={() => {
-          setChecked((prev) => !prev);
-        }}
-      />
+      {select && (
+        <Checkbox
+          checked={checked}
+          size="small"
+          onChange={() => {
+            setChecked((prev) => !prev);
+          }}
+        />
+      )}
       {typeof onRenderItem === "function" ? (
         <Box defFlex grow>
           {onRenderItem(item)}
