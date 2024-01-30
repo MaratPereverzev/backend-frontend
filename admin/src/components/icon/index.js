@@ -17,11 +17,7 @@ const Default = (props) => {
   const icon = iconData[name] ?? iconData["defIcon"];
 
   return (
-    <Icon
-      className="material-symbols-rounded"
-      sx={{ height: 24, width: 24, ...sx }}
-      {...other}
-    >
+    <Icon className="material-symbols-rounded" sx={{ ...sx }} {...other}>
       {icon}
     </Icon>
   );

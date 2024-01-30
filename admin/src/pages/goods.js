@@ -42,7 +42,6 @@ const Default = () => {
           <ButtonIcon name="filter" />
         </Box>
       }
-      bottomButton={<ButtonIcon name="settings" sxIcon={{ fontSize: 20 }} />}
       items={goods(page)}
       name="goods"
       onChangePage={handleOnChangePage}

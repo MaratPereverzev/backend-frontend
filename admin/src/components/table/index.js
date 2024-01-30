@@ -25,7 +25,6 @@ const Default = (props) => {
     name,
     items,
     topButtons,
-    bottomButton,
     onSearch,
     sx,
     sxHeader,
@@ -104,12 +103,7 @@ const Default = (props) => {
         <Rows items={items} name={name} onRenderItem={onRenderItem} />
       </Box>
       <Divider variant="middle" flexItem />
-      <Footer
-        bottomButton={bottomButton}
-        sxFooter={sxFooter}
-        name={name}
-        onChangePage={onChangePage}
-      />
+      <Footer sxFooter={sxFooter} name={name} onChangePage={onChangePage} />
     </Box>
   );
 };

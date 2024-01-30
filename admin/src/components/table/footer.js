@@ -1,7 +1,7 @@
 import { Box } from "../box";
 import { useTable } from "@context";
 import { Pagination, Typography } from "@mui/material";
-import { addEvent, dispatch } from "@hooks";
+import { addEvent } from "@hooks";
 import { useEffect, useState } from "react";
 import Popover from "./popover";
 
@@ -18,23 +18,16 @@ const CountSelect = (props) => {
   );
   const count = Object.keys(tableData?.selected ?? {}).length;
   return count > 0 ? (
-    <Typography
-      onClick={(e) => {
-        dispatch(`${name}.selectClear`);
-        e.stopPropagation();
-      }}
-    >
-      Кол-во выбранных элементов: {count}
-    </Typography>
+    <Typography>Кол-во выбранных элементов: {count}</Typography>
   ) : null;
 };
 
 const Default = (props) => {
-  const { sxFooter, bottomButton, name, onChangePage } = props;
+  const { sxFooter, name, onChangePage } = props;
 
   return (
     <Box defFlex jc="space-between" row name="footer" sx={{ ...sxFooter }}>
-      <Popover bottomButton={bottomButton} />
+      <Popover name={name} />
       <CountSelect name={name} />
       <Pagination
         count={10}

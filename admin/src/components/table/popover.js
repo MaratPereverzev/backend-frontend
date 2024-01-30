@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Box } from "../box";
+import { ButtonIcon, Button } from "../button";
 import Popover from "@mui/material/Popover";
+import { dispatch } from "@hooks";
 
 const Default = (props) => {
-  const { bottomButton } = props;
+  const { name } = props;
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -18,10 +20,14 @@ const Default = (props) => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <Box>
-      <bottomButton.type
-        {...bottomButton.props}
-        sxIcon={{ ...bottomButton.props.sxIcon }}
+    <Box ai>
+      <ButtonIcon
+        name="settings"
+        sx={{
+          rotate: open ? "90deg" : "0deg",
+          transition: "rotate 150ms ease-in-out",
+        }}
+        sxIcon={{ fontSize: 20 }}
         onClick={handleClick}
       />
       <Popover
@@ -38,7 +44,13 @@ const Default = (props) => {
           horizontal: "left",
         }}
       >
-        asdfasdga
+        <Button
+          sx={{ m: 1 }}
+          onClick={(e) => {
+            dispatch(`${name}.selectClear`);
+            e.stopPropagation();
+          }}
+        />
       </Popover>
     </Box>
   );
