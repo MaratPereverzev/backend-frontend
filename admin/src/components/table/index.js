@@ -11,11 +11,18 @@ function areEqual(prev, next) {
 
   for (let item of Object.keys(prev)) {
     if (prev[item]?.type) continue;
-    if (prev[item] !== next[item]) {
+
+    let tempPrev =
+      typeof prev[item] === "object" ? JSON.stringify(prev[item]) : prev[item];
+    let tempNext =
+      typeof next[item] === "object" ? JSON.stringify(next[item]) : next[item];
+
+    if (tempPrev !== tempNext) {
       dontRender = false;
       break;
     }
   }
+
   return dontRender;
 }
 const defStyle = { sxIcon: { fontSize: 25 } };

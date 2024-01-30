@@ -9,6 +9,7 @@ const CountSelect = (props) => {
   const { name } = props;
   const [, setReload] = useState(false);
   const tableData = useTable();
+
   useEffect(
     () =>
       addEvent(`${name}.selectChange`, () => {
@@ -16,6 +17,15 @@ const CountSelect = (props) => {
       }),
     [name]
   );
+  useEffect(
+    () =>
+      addEvent(`${name}.selectClear`, () => {
+        setReload((prev) => !prev);
+        tableData.selected = {};
+      }),
+    [name, tableData]
+  );
+
   const count = Object.keys(tableData?.selected ?? {}).length;
   return count > 0 ? (
     <Typography>Кол-во выбранных элементов: {count}</Typography>

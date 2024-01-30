@@ -3,10 +3,13 @@ import { Box } from "../box";
 import { ButtonIcon, Button } from "../button";
 import Popover from "@mui/material/Popover";
 import { dispatch } from "@hooks";
+import { useTable } from "@context";
 
 const Default = (props) => {
   const { name } = props;
   const [anchorEl, setAnchorEl] = useState(null);
+  const [, setReload] = useState(false);
+  const tableData = useTable();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,20 +40,37 @@ const Default = (props) => {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "right",
         }}
         transformOrigin={{
           vertical: "bottom",
           horizontal: "left",
         }}
+        slotProps={{
+          paper: {
+            sx: {
+              borderTopLeftRadius: 15,
+              borderTopRightRadius: 15,
+              borderBottomRightRadius: 15,
+            },
+          },
+        }}
       >
-        <Button
-          sx={{ m: 1 }}
-          onClick={(e) => {
-            dispatch(`${name}.selectClear`);
-            e.stopPropagation();
-          }}
-        />
+        <Box defFlex gap sx={{ p: 0.5 }}>
+          <Button
+            disabled={
+              Object.keys(tableData.selected ?? {}).length > 0 ? false : true
+            }
+            caption="Cнять выделения"
+            sx={{ m: 1 }}
+            sxText={{ fontSize: 12 }}
+            onClick={(e) => {
+              dispatch(`${name}.selectClear`);
+              e.stopPropagation();
+              setReload((prev) => !prev);
+            }}
+          />
+        </Box>
       </Popover>
     </Box>
   );
