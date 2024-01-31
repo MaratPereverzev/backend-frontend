@@ -10,6 +10,8 @@ const iconData = {
   search: "search",
   settings: "settings",
   filter: "filter_alt",
+  edit: "edit",
+  delete: "delete",
 };
 
 const Default = (props) => {

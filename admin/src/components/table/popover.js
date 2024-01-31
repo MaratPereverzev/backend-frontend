@@ -21,6 +21,8 @@ const Default = (props) => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const cancel =
+    showSelected && Object.keys(tableData.selected ?? {}).length === 0;
 
   return (
     <Box ai>
@@ -58,12 +60,13 @@ const Default = (props) => {
       >
         <Box defFlex gap sx={{ p: 0.5 }}>
           <Button
-            disabled={
-              showSelected && Object.keys(tableData.selected ?? {}).length === 0
-                ? true
-                : false
+            caption={
+              cancel
+                ? "Отмена"
+                : showSelected
+                ? "Cнять выделения"
+                : "Выбрать элементы"
             }
-            caption={showSelected ? "Cнять выделения" : "Выбрать элементы"}
             sx={{ m: 1 }}
             sxText={{ fontSize: 12 }}
             onClick={(e) => {
