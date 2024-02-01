@@ -2,7 +2,7 @@ import { Box } from "@components";
 import { useState, useEffect } from "react";
 import { addEvent, dispatch } from "@hooks";
 import { setPageHash, getPageHash } from "@utils";
-import { Goods } from "../pages";
+import { Goods } from "../page";
 
 const Default = (props) => {
   const [route, setRoute] = useState(getPageHash());

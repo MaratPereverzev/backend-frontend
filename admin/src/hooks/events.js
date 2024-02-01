@@ -15,4 +15,17 @@ const dispatch = (eventName, data) => {
   document.dispatchEvent(event);
 };
 
-module.exports = { addEvent, dispatch };
+const dispatchDialogEdit = (langBase, data, field = document) => {
+  dispatch(`${langBase}.dialog.edit`, data, field);
+};
+
+const dispatchDialogDelete = (langBase, data, field = document) => {
+  dispatch(`${langBase}.dialog.delete`, data, field);
+};
+
+module.exports = {
+  addEvent,
+  dispatch,
+  dispatchDialogEdit,
+  dispatchDialogDelete,
+};

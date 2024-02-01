@@ -1,5 +1,4 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -10,16 +9,19 @@ import {
 } from "@mui/material";
 import { addEvent } from "@hooks";
 import { useState, useEffect } from "react";
+import { Button } from "../button";
 
-const Default = (props) => {
+const Edit = (props) => {
   const { langBase } = props;
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState(null);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(
     () =>
-      addEvent(`${langBase}.dialog.edit`, () => {
+      addEvent(`${langBase}.dialog.edit`, (data) => {
+        setData(data?.detail);
         setOpen(true);
       }),
     [langBase]
@@ -39,21 +41,20 @@ const Default = (props) => {
           aria-labelledby="responsive-dialog-title"
         >
           <DialogTitle id="responsive-dialog-title">
-            {"Use Google's location service?"}
+            Редактирование: {data?.caption}
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Let Google help apps determine location. This means sending
-              anonymous location data to Google, even when no apps are running.
-            </DialogContentText>
+            <DialogContentText>{data?.id} - test</DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button autoFocus onClick={handleClose}>
-              Disagree
-            </Button>
-            <Button onClick={handleClose} autoFocus>
-              Agree
-            </Button>
+            <Button onClick={handleClose} caption="Сохранить" variant="text" />
+            <Button
+              onClick={handleClose}
+              autoFocus
+              caption="Отмена"
+              variant="text"
+              color="warning"
+            />
           </DialogActions>
         </Dialog>
       </>
@@ -63,4 +64,57 @@ const Default = (props) => {
   }
 };
 
-export { Default as Dialog };
+const Delete = (props) => {
+  const { langBase } = props;
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState(null);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(
+    () =>
+      addEvent(`${langBase}.dialog.delete`, (data) => {
+        setData(data?.detail);
+        setOpen(true);
+      }),
+    [langBase]
+  );
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  if (open) {
+    return (
+      <>
+        <Dialog
+          fullScreen={fullScreen}
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">
+            Удаление: {data?.caption}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>{data?.id} - test</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} caption="Сохранить" variant="text" />
+            <Button
+              onClick={handleClose}
+              autoFocus
+              caption="Отмена"
+              variant="text"
+              color="warning"
+            />
+          </DialogActions>
+        </Dialog>
+      </>
+    );
+  } else {
+    return null;
+  }
+};
+
+export { Edit as DialogEdit, Delete as DialogDelete };

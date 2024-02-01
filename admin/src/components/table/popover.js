@@ -78,6 +78,7 @@ const Default = (props) => {
                 dispatch(`${name}.selectCheckBox`, { show: true });
                 setShowSelected(true);
               }
+              handleClose();
               e.stopPropagation();
             }}
           />

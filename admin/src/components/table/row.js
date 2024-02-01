@@ -15,7 +15,7 @@ function areEqual(prev, next) {
 }
 
 const Default = memo((props) => {
-  const { item, name, onRenderItem } = props;
+  const { item, name, onRenderItem, langBase } = props;
   const { id, caption } = item;
   const [checked, setChecked] = useState(false);
   const [select, setSelect] = useState(false);
@@ -52,7 +52,7 @@ const Default = memo((props) => {
       )}
       {typeof onRenderItem === "function" ? (
         <Box defFlex grow>
-          {onRenderItem(item)}
+          {onRenderItem(item, langBase)}
         </Box>
       ) : (
         { caption }

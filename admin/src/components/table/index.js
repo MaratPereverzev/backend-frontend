@@ -39,6 +39,7 @@ const Default = (props) => {
     sxFooter,
     onChangePage,
     onRenderItem,
+    langBase,
   } = props;
 
   const [search, setSearch] = useState("");
@@ -107,7 +108,12 @@ const Default = (props) => {
         name="content"
         sx={{ height: "1px", overflowY: "scroll", ...sxContent }}
       >
-        <Rows items={items} name={name} onRenderItem={onRenderItem} />
+        <Rows
+          items={items}
+          name={name}
+          onRenderItem={onRenderItem}
+          langBase={langBase}
+        />
       </Box>
       <Divider variant="middle" flexItem />
       <Footer sxFooter={sxFooter} name={name} onChangePage={onChangePage} />

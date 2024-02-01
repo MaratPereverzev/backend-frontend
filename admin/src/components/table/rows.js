@@ -2,7 +2,7 @@ import { Divider, Stack } from "@mui/material";
 import Row from "./row";
 
 const Default = (props) => {
-  const { items, name, onRenderItem } = props;
+  const { items, name, onRenderItem, langBase } = props;
 
   if (!Array.isArray(items) || !items.length > 0) return null;
 
@@ -15,6 +15,7 @@ const Default = (props) => {
             item={item}
             name={name}
             onRenderItem={onRenderItem}
+            langBase={langBase}
           />
         );
       })}
