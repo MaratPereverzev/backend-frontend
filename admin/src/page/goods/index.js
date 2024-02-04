@@ -3,8 +3,8 @@ import { useState, useCallback } from "react";
 import useRow from "./row";
 
 const goods = (page = 0) => {
-  const perPage = 10;
-  return new Array(10).fill(null).map((_, index) => ({
+  const perPage = 1000;
+  return new Array(perPage).fill(null).map((_, index) => ({
     id: index,
     caption: `good №${perPage * page + index}`,
   }));

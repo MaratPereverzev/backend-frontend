@@ -101,13 +101,7 @@ const Default = (props) => {
           )}
         </Stack>
       </Box>
-      <Box
-        defFlex
-        gap
-        grow
-        name="content"
-        sx={{ height: "1px", overflowY: "scroll", ...sxContent }}
-      >
+      <Box defFlex gap grow name="content" sx={{ height: "1px", ...sxContent }}>
         <Rows
           items={items}
           name={name}
