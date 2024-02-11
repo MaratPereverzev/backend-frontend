@@ -12,6 +12,7 @@ const iconData = {
   filter: "filter_alt",
   edit: "edit",
   delete: "delete",
+  clear: "close",
 };
 
 const Default = (props) => {

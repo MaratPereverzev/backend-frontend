@@ -1,4 +1,5 @@
-import { Table, ButtonIcon, Box, DialogEdit, DialogDelete } from "@components";
+import { Table, ButtonIcon, Box } from "@components";
+import Dialogs from "../main/dialog";
 import { useState, useCallback } from "react";
 import useRow from "./row";
 
@@ -38,8 +39,7 @@ const Default = () => {
         onRenderItem={useRow(langBase)}
         pageCount={20}
       />
-      <DialogEdit langBase={langBase} />
-      <DialogDelete langBase={langBase} />
+      <Dialogs langBase={langBase} />
     </Box>
   );
 };
