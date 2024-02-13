@@ -3,7 +3,7 @@ import { Checkbox } from "@mui/material";
 import { memo } from "react";
 import { useState, useEffect } from "react";
 import { useTable } from "@context";
-import { dispatch, addEvent } from "@hooks";
+import { dispatch, addEvent } from "@utils";
 
 function areEqual(prev, next) {
   const result =

@@ -1,7 +1,6 @@
 import { Box, Divider, MenuButton, Text, Icon } from "@components";
 import { useState, useEffect, useCallback, memo } from "react";
-import { dispatch, addEvent } from "@hooks";
-import { getPageHash } from "@utils";
+import { dispatch, addEvent, getPageHash } from "@utils";
 import { Page } from "./pages";
 
 function areEqual() {

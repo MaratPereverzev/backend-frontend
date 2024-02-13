@@ -13,7 +13,7 @@ module.exports = {
       "@api": resolvePath("./src/api"),
       "@context": resolvePath("./src/context"),
       "@data": resolvePath("./src/data"),
-      "@hooks": resolvePath("./src/hooks"),
+      /*"@hooks": resolvePath("./src/hooks"),*/
       "@utils": resolvePath("./src/utils"),
       "@pages": resolvePath("./src/pages"),
     },

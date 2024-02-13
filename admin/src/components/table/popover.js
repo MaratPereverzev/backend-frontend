@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box } from "../box";
 import { ButtonIcon, Button } from "../button";
 import Popover from "@mui/material/Popover";
-import { dispatch } from "@hooks";
+import { dispatch } from "@utils";
 import { useTable } from "@context";
 
 const Default = (props) => {

@@ -1,7 +1,7 @@
 import { Box } from "../box";
 import { useTable } from "@context";
 import { Pagination, Typography } from "@mui/material";
-import { addEvent } from "@hooks";
+import { addEvent } from "@utils";
 import { useEffect, useState } from "react";
 import Popover from "./popover";
 

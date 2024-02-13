@@ -31,12 +31,14 @@ const Default = (props) => {
         caption="caption1"
         onChange={handleOnChange}
         value={data?.caption1}
+        clear
       />
       <Input
         name="caption2"
         caption="caption2"
         onChange={handleOnChange}
         value={data?.caption2}
+        clear
       />
     </Box>
   );

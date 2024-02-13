@@ -1,6 +1,6 @@
 import { Box } from "@components";
 import { useState, useEffect } from "react";
-import { addEvent, dispatch } from "@hooks";
+import { addEvent, dispatch } from "@utils";
 import { setPageHash, getPageHash } from "@utils";
 import { Goods } from "../page";
 

@@ -1,5 +1,5 @@
 import { Box, ButtonIcon } from "@components";
-import { dispatchDialogDelete, dispatchDialogEdit } from "@hooks";
+import { dispatchDialogDelete, dispatchDialogEdit } from "@utils";
 import { useCallback } from "react";
 
 const useRenderRow = () =>

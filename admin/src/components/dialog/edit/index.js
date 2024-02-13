@@ -7,7 +7,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { addEvent } from "@hooks";
+import { addEvent } from "@utils";
 import { useState, useEffect } from "react";
 import { Button } from "../../button";
 
