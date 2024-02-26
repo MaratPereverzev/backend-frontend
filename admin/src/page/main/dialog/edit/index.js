@@ -1,46 +1,44 @@
-import { Box, Input } from "@components";
-import { useState, useCallback } from "react";
+import { Box } from "@components";
+import Setting from "./setting";
+import Price from "./price";
+import Tabs from "@components/tabs";
+import { useAction, useDef } from "@utils";
+import { useState } from "react";
+
+const tabs = [
+  { name: "setting", validate: ["caption"] },
+  { name: "price", validate: ["price"] },
+];
 
 const Default = (props) => {
   const [data, setData] = useState(null);
+  const [dialogData, setDialogData] = useState({ tabs: 0 });
 
-  const handleOnChange = useCallback(
-    (name) => (value) => {
-      setData((prev) => {
-        if (!prev) {
-          prev = {};
-        }
-        prev[name] = value;
-        return { ...prev };
-      });
-    },
-    []
-  );
+  const handleOnChange = useAction(setData);
+  const handleOnDialogChange = useAction(setDialogData);
+
+  const def = useDef(data, handleOnChange);
 
   return (
-    <Box defFlex gap sx={{ py: 0.5 }}>
-      <Input
-        name="caption"
-        caption="caption"
-        onChange={handleOnChange}
-        value={data?.caption}
-        clear
+    <>
+      <Tabs
+        items={tabs}
+        tabs={dialogData?.tabs}
+        onChange={handleOnDialogChange}
       />
-      <Input
-        name="caption1"
-        caption="caption1"
-        onChange={handleOnChange}
-        value={data?.caption1}
-        clear
-      />
-      <Input
-        name="caption2"
-        caption="caption2"
-        onChange={handleOnChange}
-        value={data?.caption2}
-        clear
-      />
-    </Box>
+      <Box
+        sx={{
+          p: 1,
+          minHeight: 150,
+          maxHeight: 250,
+          overflowY: "auto",
+          overflowX: "hidden",
+        }}
+      >
+        {dialogData.tabs === 0 && <Setting def={def} />}
+        {dialogData.tabs === 1 && <Price def={def} />}
+      </Box>
+    </>
   );
 };
 

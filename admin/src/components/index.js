@@ -6,3 +6,4 @@ export * from "./icon";
 export * from "./table";
 export * from "./searchBar";
 export * from "./dialog";
+export * from "./tabs";
