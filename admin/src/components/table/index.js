@@ -1,4 +1,4 @@
-import { Input } from "../searchBar";
+import { Input } from "../input";
 import { Box } from "../box";
 import Footer from "./footer";
 import Rows from "./rows";

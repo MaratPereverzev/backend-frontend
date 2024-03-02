@@ -4,6 +4,6 @@ export * from "./box";
 export * from "./divider";
 export * from "./icon";
 export * from "./table";
-export * from "./searchBar";
+export * from "./input";
 export * from "./dialog";
 export * from "./tabs";

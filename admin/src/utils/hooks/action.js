@@ -1,4 +1,20 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+
+const getReadData = (storeName) => {
+  let data = {};
+
+  try {
+    const readData = localStorage.getItem(storeName);
+    if (readData && readData.trim() !== "") {
+      data = JSON.parse(readData);
+    }
+  } catch (err) {
+    data = {};
+    console.log(err);
+  }
+
+  return data;
+};
 
 const useAction = (setData, onChange) => {
   return useCallback(
@@ -19,4 +35,42 @@ const useAction = (setData, onChange) => {
   );
 };
 
-export { useAction };
+const useActionDialog = (setDialogData, storeName, itemsStore) => {
+  useEffect(() => {
+    let oldData = getReadData(storeName);
+
+    const newData = Object.keys(oldData).reduce((prev, item) => {
+      if (itemsStore.includes(item)) {
+        prev[item] = oldData[item];
+      }
+      return prev;
+    }, {});
+
+    if (Object.keys(oldData).length > 0) {
+      setDialogData((prev) => ({ ...newData, ...prev }));
+    }
+  }, [itemsStore, storeName, setDialogData]);
+
+  const store = useCallback(
+    (name, value, prev) => {
+      if (Array.isArray(itemsStore) && storeName) {
+        let oldData = getReadData(storeName);
+
+        //oldData[name] = value;
+        itemsStore.forEach((item) => {
+          if (name === item) {
+            oldData[item] = value;
+          }
+        });
+
+        localStorage.setItem(storeName, JSON.stringify(oldData));
+      }
+
+      return value;
+    },
+    [storeName, itemsStore]
+  );
+  return useAction(setDialogData, store);
+};
+
+export { useAction, useActionDialog };

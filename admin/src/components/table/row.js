@@ -40,7 +40,7 @@ const Default = memo((props) => {
   });
 
   return (
-    <Box defFlex row ai sx={{ p: 1 }}>
+    <Box defFlex row grow ai sx={{ p: 1 }}>
       {select && (
         <Checkbox
           checked={checked}

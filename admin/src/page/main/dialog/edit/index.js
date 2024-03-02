@@ -2,7 +2,7 @@ import { Box } from "@components";
 import Setting from "./setting";
 import Price from "./price";
 import Tabs from "@components/tabs";
-import { useAction, useDef } from "@utils";
+import { useAction, useActionDialog, useDef } from "@utils";
 import { useState } from "react";
 
 const tabs = [
@@ -10,12 +10,19 @@ const tabs = [
   { name: "price", validate: ["price"] },
 ];
 
+const storeProps = ["tabs"];
+
 const Default = (props) => {
+  const { langBase } = props;
   const [data, setData] = useState(null);
-  const [dialogData, setDialogData] = useState({ tabs: 0 });
+  const [dialogData, setDialogData] = useState(null);
 
   const handleOnChange = useAction(setData);
-  const handleOnDialogChange = useAction(setDialogData);
+  const handleOnDialogChange = useActionDialog(
+    setDialogData,
+    langBase,
+    storeProps
+  );
 
   const def = useDef(data, handleOnChange);
 
@@ -35,8 +42,8 @@ const Default = (props) => {
           overflowX: "hidden",
         }}
       >
-        {dialogData.tabs === 0 && <Setting def={def} />}
-        {dialogData.tabs === 1 && <Price def={def} />}
+        {dialogData?.tabs === 0 && <Setting def={def} />}
+        {dialogData?.tabs === 1 && <Price def={def} />}
       </Box>
     </>
   );

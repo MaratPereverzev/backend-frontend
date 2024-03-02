@@ -8,7 +8,7 @@ const Default = (props) => {
     <>
       <DialogEdit
         langBase={langBase}
-        container={<Container />}
+        container={<Container langBase={`${langBase}.dialog.edit`} />}
         sxDialogContent={{
           py: 0,
           px: 0.25,

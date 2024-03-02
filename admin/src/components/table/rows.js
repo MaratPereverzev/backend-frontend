@@ -1,4 +1,5 @@
-import { Divider, Box } from "@mui/material";
+import { Divider } from "@mui/material";
+import { Box } from "@components";
 import { ViewportList } from "react-viewport-list";
 import { useRef } from "react";
 import Row from "./row";
@@ -23,16 +24,16 @@ const Default = (props) => {
       <ViewportList items={items} viewportRef={ref} overscan={5}>
         {(item, index, arr) => {
           return (
-            <Box defFlex grow row key={item?.id ?? index}>
-              <Row
-                item={item}
-                name={name}
-                onRenderItem={onRenderItem}
-                langBase={langBase}
-              />
-              {arr.length - 1 !== index && (
-                <Divider variant="middle" flexItem />
-              )}
+            <Box key={item?.id ?? index}>
+              <Box defFlex grow row>
+                <Row
+                  item={item}
+                  name={name}
+                  onRenderItem={onRenderItem}
+                  langBase={langBase}
+                />
+              </Box>
+              {arr.length - 1 !== index && <Divider variant="middle" />}
             </Box>
           );
         }}
