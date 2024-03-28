@@ -1,20 +1,5 @@
 import { useCallback, useEffect } from "react";
-
-const getReadData = (storeName) => {
-  let data = {};
-
-  try {
-    const readData = localStorage.getItem(storeName);
-    if (readData && readData.trim() !== "") {
-      data = JSON.parse(readData);
-    }
-  } catch (err) {
-    data = {};
-    console.log(err);
-  }
-
-  return data;
-};
+import { getReadData } from "../localStorage";
 
 const useAction = (setData, onChange) => {
   return useCallback(

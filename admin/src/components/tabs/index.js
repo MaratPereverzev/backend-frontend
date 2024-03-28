@@ -3,14 +3,13 @@ import { Box } from "@components";
 import Tab from "./tab";
 
 const Default = (props) => {
-  const { name = "tabs", items, tabs, onChange } = props;
+  const { name = "tabs", tabs = 0, items, onChange } = props;
 
   const handleChange = (event, newValue) => {
     if (typeof onChange === "function") {
       onChange(name)(newValue);
     }
   };
-
   return (
     <Box sx={{ maxWidth: { xs: 320, sm: 480 }, bgcolor: "background.paper" }}>
       <Tabs

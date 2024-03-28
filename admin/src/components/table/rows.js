@@ -5,7 +5,7 @@ import { useRef } from "react";
 import Row from "./row";
 
 const Default = (props) => {
-  const { items, name, onRenderItem, langBase } = props;
+  const { items, name, onRenderItem, langBase, loading } = props;
 
   const ref = useRef(null);
 
@@ -19,6 +19,9 @@ const Default = (props) => {
         flexDirection: "column",
         overflowY: "auto",
         willChange: "transform",
+        flexGrow: 1,
+        filter: `blur(${loading ? 2 : 0}px)`,
+        transition: "filter 500ms linear",
       }}
     >
       <ViewportList items={items} viewportRef={ref} overscan={5}>

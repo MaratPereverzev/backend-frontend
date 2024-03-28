@@ -40,6 +40,7 @@ const Default = (props) => {
     onChangePage,
     onRenderItem,
     langBase,
+    loading,
   } = props;
 
   const [search, setSearch] = useState("");
@@ -107,6 +108,7 @@ const Default = (props) => {
           name={name}
           onRenderItem={onRenderItem}
           langBase={langBase}
+          loading={loading}
         />
       </Box>
       <Divider variant="middle" flexItem />

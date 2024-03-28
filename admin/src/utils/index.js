@@ -1,1 +1,5 @@
-module.exports = { ...require("./constants"), ...require("./hooks") };
+module.exports = {
+  ...require("./constants"),
+  ...require("./hooks"),
+  ...require("./localStorage"),
+};

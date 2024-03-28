@@ -13,7 +13,8 @@ const goods = (page = 0) => {
 
 const langBase = "goods";
 
-const Default = () => {
+const Default = (props) => {
+  const { loading } = props;
   const [page, setPage] = useState(0);
 
   const handleOnChangePage = useCallback(
@@ -38,6 +39,7 @@ const Default = () => {
         onChangePage={handleOnChangePage}
         onRenderItem={useRow(langBase)}
         pageCount={20}
+        loading={loading}
       />
       <Dialogs langBase={langBase} />
     </Box>
