@@ -1,32 +1,52 @@
 import { DialogDelete, DialogEdit } from "@components";
-import { useState } from "react";
+import { useGoodGetById } from "@api";
+import { useState, memo, useMemo, useCallback } from "react";
 import Container from "./edit";
+import { areEqualAlways } from "@utils";
 
 const useData = () => {
   const [loading, setLoading] = useState(false);
+  const [callbackGet, loadingGetById] = useGoodGetById();
 
-  const handleOnPost = (data, onClose) => {
+  const handleOnPost = useCallback((data, onClose) => {
     setLoading(true);
     console.log(data);
     onClose();
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  };
-  const handleOnEdit = (data, onClose) => {
+  }, []);
+
+  const handleOnEdit = useCallback((data, onClose) => {
     setLoading(true);
     console.log(data);
     onClose();
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  };
-  return { onPost: handleOnPost, onEdit: handleOnEdit, loading };
+  }, []);
+
+  const handleOnGet = useCallback(
+    (data, onClose) => {
+      callbackGet(data, onClose);
+    },
+    [callbackGet]
+  );
+
+  const result = useMemo(() => {
+    return {
+      onPost: handleOnPost,
+      onEdit: handleOnEdit,
+      onGet: handleOnGet,
+    };
+  }, [handleOnEdit, handleOnGet, handleOnPost]);
+
+  result.loading = loading || loadingGetById;
+  return result;
 };
 
-const Default = (props) => {
+const Default = memo((props) => {
   const { langBase } = props;
-
   return (
     <>
       <DialogEdit
@@ -37,11 +57,12 @@ const Default = (props) => {
           px: 0.25,
         }}
         sxDialogHeader={{ py: 1.75 }}
-        useData={useData()}
+        {...useData()}
+        needLoading
       />
       <DialogDelete langBase={langBase} />
     </>
   );
-};
+}, areEqualAlways);
 
 export default Default;

@@ -1,49 +1,20 @@
-import { Table, ButtonIcon, Box } from "@components";
-import Dialogs from "../main/dialog";
-import { useState, useCallback } from "react";
-import useRow from "./row";
+import { Box, Button } from "@components";
+import { useRootSetting } from "@context";
 
-const goods = (page = 0) => {
-  const perPage = 1000;
-  return new Array(perPage).fill(null).map((_, index) => ({
-    id: index,
-    caption: `good №${perPage * page + index}`,
-  }));
-};
-
-const langBase = "goods";
-
-const Default = (props) => {
-  const { loading } = props;
-  const [page, setPage] = useState(0);
-
-  const handleOnChangePage = useCallback(
-    (name) => (page) => {
-      setPage(page - 1);
-    },
-    []
-  );
+const Default = () => {
+  const context = useRootSetting();
 
   return (
-    <Box defFlex center sx={{ height: "100%", width: "100%" }}>
-      <Table
-        topButtons={
-          <Box>
-            <ButtonIcon name="search" />
-            <ButtonIcon name="filter" />
-          </Box>
-        }
-        items={goods(page)}
-        langBase="goods"
-        name="goods"
-        onChangePage={handleOnChangePage}
-        onRenderItem={useRow(langBase)}
-        pageCount={20}
-        loading={loading}
-      />
-      <Dialogs langBase={langBase} />
+    <Box defFlex center sx={{ width: "100%", height: "100%" }}>
+      HELLO
+      <Button
+        caption={context.userAuth ? "isAuth" : "not auth"}
+        onClick={() => {
+          context.userAuth = true;
+        }}
+      ></Button>
     </Box>
   );
 };
 
-export { Default as Goods };
+export { Default as PageGood };

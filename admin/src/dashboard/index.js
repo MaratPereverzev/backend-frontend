@@ -1,7 +1,8 @@
-import { Box, Divider, MenuButton, Text, Icon } from "@components";
+import { Box, Divider, MenuButton, Text, Icon, Button } from "@components";
 import { useState, useEffect, useCallback, memo } from "react";
 import { dispatch, addEvent, getPageHash } from "@utils";
 import { Page } from "./pages";
+import { DashboardContext, useRootSetting } from "@context";
 
 function areEqual() {
   return true;
@@ -103,7 +104,7 @@ const Default = () => {
             borderRadius: 4,
           }}
         >
-          <MyButton name="logo" caption="ok" open={open} sx={{ height: 40 }} />
+          <MyButton name="main" caption="ok" open={open} sx={{ height: 40 }} />
           <Divider sx={{ my: 1.5 }} />
           <Box defFlex gap={1.5} grow>
             <MyButton name="goods" caption="goods" open={open} />
@@ -137,7 +138,34 @@ const Default = () => {
 };
 
 const RootDefault = (props) => {
-  return <Default {...props} />;
+  const [, setReload] = useState(false);
+
+  const context = useRootSetting();
+
+  useEffect(() => addEvent("auth", () => setReload((prev) => !prev)), []);
+
+  return (
+    <DashboardContext>
+      {context?.userAuth ? (
+        <Button
+          caption="SUPER USER"
+          onClick={() => {
+            context.userAuth = false;
+          }}
+          color="success"
+        />
+      ) : (
+        <Button
+          caption="not auth"
+          onClick={() => {
+            context.userAuth = true;
+          }}
+          color="warning"
+        />
+      )}
+      {context?.userAuth && <Default {...props} />}
+    </DashboardContext>
+  );
 };
 
 export { RootDefault as Dashboard };

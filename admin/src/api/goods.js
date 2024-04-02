@@ -1,31 +1,47 @@
 import { useCallback, useState } from "react";
-import { useFetch } from "./useFetch";
+import { buildGet, useFetch } from "@utils";
 
-const useGet = (perPage) => {
+const baseUrl = `https://dummyjson.com/products`;
+
+const useGet = (limit) => {
   const [rows, setRows] = useState(null);
-  const { loading, method } = useFetch(
-    `https://dummyjson.com/products?limit=${perPage}`
-  );
+  const { loading, get } = useFetch(baseUrl);
 
   return [
     useCallback(
       (data) => {
-        const { page, ...other } = data ?? {};
-        method(`&skip=${page * perPage}`, other, (newData) => {
+        const { page } = data ?? {};
+        const params = { limit, skip: page * limit };
+
+        get(buildGet(params)).then((newData) => {
           if (newData) {
-            newData.totalPage = Math.ceil(newData.total / perPage);
+            newData.totalPage = Math.ceil(newData.total / limit);
           }
           setRows(newData);
         });
       },
-      [method, perPage]
+      [limit, get]
     ),
     loading,
     rows,
   ];
 };
 
-const useGetAll = () => {};
+const useGetById = () => {
+  const { response, loading, get } = useFetch(baseUrl);
+
+  return [
+    useCallback(
+      (data, setData) => {
+        get("/" + data?.id).then((data) => {
+          setData(response?.ok ? data : null);
+        });
+      },
+      [get, response]
+    ),
+    loading,
+  ];
+};
 
 const useUpdate = () => {};
 
@@ -35,7 +51,8 @@ const useDel = () => {};
 
 export {
   useGet as useGoodsGet,
-  useGetAll as useGoodsGetAll,
+  useGetById as useGoodGetById,
+  //useGetAll as useGoodsGetAll,
   useUpdate as useGoodsUpdate,
   usePost as useGoodsPost,
   useDel as useGoodsDelete,

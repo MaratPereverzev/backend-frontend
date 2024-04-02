@@ -57,18 +57,17 @@ const Default = (props) => {
       >
         <Input
           size="small"
+          value={search ?? ""}
           label="search prompt"
           sx={{ "& fieldset": { borderTopLeftRadius: 10 }, flexGrow: 1 }}
-          onChange={({ target }) => {
-            setSearch(target.value);
-          }}
+          onChange={() => setSearch}
           onKeyUp={(e) => {
             if (e.keyChar === 13 && typeof onSearch === "function") {
-              console.log(search);
               onSearch();
             }
           }}
           variant="filled"
+          clear
         />
         <Stack
           direction="row"

@@ -15,7 +15,7 @@ const Default = (props) => {
   if (jc) newSx.justifyContent = jc === true ? "center" : jc;
 
   if (center) {
-    newSx.alighItems = "center";
+    newSx.alignItems = "center";
     newSx.justifyContent = "center";
   }
 

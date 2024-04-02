@@ -2,7 +2,7 @@ import { Box } from "@components";
 import { useState, useEffect } from "react";
 import { addEvent, dispatch } from "@utils";
 import { setPageHash, getPageHash } from "@utils";
-import { Goods } from "../page";
+import { PageMain, PageGood } from "../page";
 
 const Default = (props) => {
   const [route, setRoute] = useState(getPageHash());
@@ -36,7 +36,8 @@ const Default = (props) => {
         ...sx,
       }}
     >
-      {(route === "goods" || !route) && <Goods />}
+      {(route === "main" || !route) && <PageMain />}
+      {route === "goods" && <PageGood />}
     </Box>
   );
 };

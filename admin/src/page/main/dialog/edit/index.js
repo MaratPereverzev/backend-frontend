@@ -13,8 +13,8 @@ const tabs = [
 const storeProps = ["tabs"];
 
 const Default = (props) => {
-  const { langBase } = props;
-  const [data, setData] = useState(null);
+  const { langBase, data: oldData } = props;
+  const [data, setData] = useState(oldData);
   const [dialogData, setDialogData] = useState(null);
 
   const handleOnChange = useAction(setData);

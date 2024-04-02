@@ -31,6 +31,8 @@ const Default = memo((props) => {
     ...other
   } = props;
 
+  other.multiline = other.rows > 0;
+
   const clearComponent = clear ? (
     <ButtonIcon
       name="clear"

@@ -5,7 +5,7 @@ const iconData = {
   orders: "receipt_long",
   open: "keyboard_tab",
   close: "keyboard_tab_rtl",
-  logo: "polymer",
+  main: "polymer",
   defIcon: "Block",
   search: "search",
   settings: "settings",

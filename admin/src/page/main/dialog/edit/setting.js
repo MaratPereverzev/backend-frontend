@@ -6,13 +6,13 @@ const Default = (props) => {
   return (
     <Box defFlex gap sx={{ py: 0.5 }}>
       <Box defFlex row gap>
-        <Input {...def("caption")} variant="outlined" />
-        <Input {...def("caption1")} variant="outlined" />
+        <Input {...def("title")} variant="outlined" />
+        <Input {...def("category")} variant="outlined" />
       </Box>
       <Box defFlex row gap>
-        <Input {...def("caption2")} variant="outlined" />
-        <Input {...def("caption3")} variant="outlined" />
+        <Input {...def("brand")} variant="outlined" />
       </Box>
+      <Input {...def("description")} variant="outlined" rows={4} />
     </Box>
   );
 };
