@@ -49,10 +49,10 @@ const MenuButton = (props) => {
 };
 
 const ButtonIcon = (props) => {
-  const { name, sx, sxIcon, ...other } = props;
+  const { name, sx, sxIcon, disabled, ...other } = props;
 
   return (
-    <IconButton sx={{ ...sx }}>
+    <IconButton sx={{ ...sx }} disabled={disabled}>
       <Icon name={name} sx={{ ...sxIcon }} {...other} />
     </IconButton>
   );

@@ -6,7 +6,6 @@ const Default = (props) => {
 
   const context = useRootSetting();
 
-  console.log(context);
   return (
     <Provider
       options={{
@@ -16,15 +15,15 @@ const Default = (props) => {
         interceptors: {
           request: ({ options }) => {
             options.headers["x-server-sacredApp"] = "0.0.1";
-            options.headers["authorization"] = "JWT 123.456.789";
+            options.headers["authorization"] =
+              localStorage.getItem("token") ?? "";
 
             return options;
           },
           response: ({ response }) => {
             if (response.status === 401) {
-              console.log("error auth");
-            } else if (response.status === 200) {
-              console.log("SUCCESS DATA", response?.data);
+              localStorage.removeItem("token");
+              context.userAuth = false;
             }
 
             return response;

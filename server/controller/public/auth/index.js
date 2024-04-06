@@ -12,8 +12,11 @@ const get = (req, res) => {
     .then((data) => {
       if (data) {
         return {
-          token: jwtCreate({ id: data.id }, password),
-          userCaption: data.login,
+          isAuth: true,
+          accessToken: jwtCreate({ id: data.id }, password),
+          userCaption: data?.login,
+          title: process.setting.title,
+          version: process.setting.version,
         };
       }
       throw new Error("AuthError");

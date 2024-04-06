@@ -36,7 +36,13 @@ const Default = memo((props) => {
   const clearComponent = clear ? (
     <ButtonIcon
       name="clear"
-      sxIcon={{ fontSize: 20 }}
+      disabled={other?.disabled}
+      sxIcon={{
+        fontSize: 20,
+        ...(other?.disabled && {
+          color: ({ palette }) => palette.action.disabled,
+        }),
+      }}
       onClick={(e) => {
         if (typeof onChange === "function") onChange(name)(null);
         e.stopPropagation();
@@ -49,7 +55,7 @@ const Default = memo((props) => {
       name={name}
       label={caption}
       value={value ?? ""}
-      variant={variant ?? "filled"}
+      variant={variant /*?? "filled"*/}
       size={"small"}
       onChange={(e) => {
         if (typeof onChange === "function") onChange(name)(e?.target?.value);

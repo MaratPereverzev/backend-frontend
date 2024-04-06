@@ -13,6 +13,7 @@ const iconData = {
   edit: "edit",
   delete: "delete",
   clear: "close",
+  logOut: "logOut",
 };
 
 const Default = (props) => {

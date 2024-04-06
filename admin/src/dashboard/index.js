@@ -1,7 +1,8 @@
-import { Box, Divider, MenuButton, Text, Icon, Button } from "@components";
+import { Box, Divider, MenuButton, Text, Icon } from "@components";
 import { useState, useEffect, useCallback, memo } from "react";
 import { dispatch, addEvent, getPageHash } from "@utils";
 import { Page } from "./pages";
+import Login from "./login";
 import { DashboardContext, useRootSetting } from "@context";
 
 function areEqual() {
@@ -72,6 +73,7 @@ const MyButton = (props) => {
 
 const Default = () => {
   const [open, setOpen] = useState(true);
+  const context = useRootSetting();
 
   useEffect(() => {
     return addEvent("closeSideBar", () => {
@@ -112,6 +114,15 @@ const Default = () => {
           </Box>
           <Box defFlex>
             <MyButton
+              name="logOut"
+              caption="exit"
+              open={open}
+              onClick={() => {
+                context.userAuth = false;
+              }}
+            />
+            <Divider sx={{ my: 0.5 }} />
+            <MyButton
               name="close"
               caption="close"
               open={open}
@@ -146,24 +157,7 @@ const RootDefault = (props) => {
 
   return (
     <DashboardContext>
-      {context?.userAuth ? (
-        <Button
-          caption="SUPER USER"
-          onClick={() => {
-            context.userAuth = false;
-          }}
-          color="success"
-        />
-      ) : (
-        <Button
-          caption="not auth"
-          onClick={() => {
-            context.userAuth = true;
-          }}
-          color="warning"
-        />
-      )}
-      {context?.userAuth && <Default {...props} />}
+      {context?.userAuth === true ? <Default {...props} /> : <Login />}
     </DashboardContext>
   );
 };
